@@ -38,4 +38,26 @@ public class ObservationController {
     public Observation createObservation(@RequestBody Observation observation) {
         return observationRepository.save(observation);
     }
+
+    @PutMapping("/observations/{id}")
+    public ResponseEntity<Observation> updateObservation(
+            @PathVariable(value = "id") Long observationId, @RequestBody Observation observationDetails)
+            throws ResourceNotFoundException {
+
+        Observation observation =
+                observationRepository
+                        .findById(observationId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Observation not found on :: " + observationId));
+
+        observation.setCode(observationDetails.getCode());
+        observation.setCodeListCode(observationDetails.getCodeListCode());
+        observation.setDisplayValue(observationDetails.getDisplayValue());
+        observation.setLongDescription(observationDetails.getLongDescription());
+        observation.setFromDate(observationDetails.getFromDate());
+        observation.setToDate(observationDetails.getToDate());
+        observation.setSortingPriority(observationDetails.getSortingPriority());
+
+        final Observation updatedObservation = observationRepository.save(observation);
+        return ResponseEntity.ok(updatedObservation);
+    }
 }
