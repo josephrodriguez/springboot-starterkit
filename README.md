@@ -1,11 +1,11 @@
 # Gerimedica
 
 #GET
-GET http://localhost:8080/api/observations/271636001
+http://localhost:8080/api/observations/271636001
 
 
-#POST
-POST http://localhost:8080/api/observations/
+#POST 
+http://localhost:8080/api/observations/
 Content-Type: application/json
 
 ```
@@ -22,7 +22,7 @@ Content-Type: application/json
 ```
 
 #PUT
-POST http://localhost:8080/api/observations/1
+http://localhost:8080/api/observations/1
 Content-Type: application/json
 
 ```
@@ -39,4 +39,4 @@ Content-Type: application/json
 ```
 
 #DELETE
-DELETE http://localhost:8080/api/observations/ZIB001
+http://localhost:8080/api/observations/ZIB001
