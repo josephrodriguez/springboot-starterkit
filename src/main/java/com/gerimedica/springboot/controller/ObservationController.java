@@ -75,4 +75,11 @@ public class ObservationController {
         observationRepository.delete(observation);
         return ResponseEntity.ok(observation);
     }
+
+    @DeleteMapping("/observations")
+    public ResponseEntity deleteAll() {
+
+        observationRepository.deleteAll();
+        return ResponseEntity.ok().build();
+    }
 }
