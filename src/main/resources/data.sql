@@ -1,0 +1,2 @@
+INSERT INTO OBSERVATIONS(source, code_list_code, code, display_value, long_description, from_date, to_date, sorting_priority)
+VALUES("ZIB", "ZIB001", "271636001", "Polsslag regelmatig", "The long description is necessary", "2019-01-01", "", 1);
