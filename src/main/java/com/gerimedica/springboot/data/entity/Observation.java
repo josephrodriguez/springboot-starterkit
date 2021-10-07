@@ -4,36 +4,36 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name = "OBSERVATION")
+@Table(name = "OBSERVATIONS")
 public class Observation {
 
     @Id
-    @Column(name = "OBSERVATION_ID")
+    @Column(name = "observation_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long observationId;
 
-    @Column(name = "SOURCE")
+    @Column(name = "source")
     private String source;
 
-    @Column(name = "CODE_LIST_CODE")
+    @Column(name = "code_list_code")
     private String codeListCode;
 
-    @Column(name = "CODE", unique = true)
+    @Column(name = "code", unique = true)
     private String code;
 
-    @Column(name = "DISPLAY_VALUE")
+    @Column(name = "display_value")
     private String displayValue;
 
-    @Column(name = "LONG_DESCRIPTION")
+    @Column(name = "long_description")
     private String longDescription;
 
-    @Column(name = "FROM_DATE")
+    @Column(name = "from_date")
     private Date fromDate;
 
-    @Column(name = "TO_DATE")
+    @Column(name = "to_date")
     private Date toDate;
 
-    @Column(name = "SORTING_PRIORITY")
+    @Column(name = "sorting_priority")
     private Integer sortingPriority;
 
     public long getObservationId() {
