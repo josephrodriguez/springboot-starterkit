@@ -18,7 +18,7 @@ public class Observation {
     @Column(name = "CODE_LIST_CODE")
     private String codeListCode;
 
-    @Column(name = "CODE")
+    @Column(name = "CODE", unique = true)
     private String code;
 
     @Column(name = "DISPLAY_VALUE")
