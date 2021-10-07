@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -59,5 +60,19 @@ public class ObservationController {
 
         final Observation updatedObservation = observationRepository.save(observation);
         return ResponseEntity.ok(updatedObservation);
+    }
+
+
+    @DeleteMapping("/observations/{id}")
+    public ResponseEntity<Observation> deleteObservation(@PathVariable(value = "id") Long observationId)
+        throws ResourceNotFoundException {
+
+        Observation observation =
+                observationRepository
+                        .findById(observationId)
+                        .orElseThrow(() -> new ResourceNotFoundException("Observation not found on :: " + observationId));
+
+        observationRepository.delete(observation);
+        return ResponseEntity.ok(observation);
     }
 }
