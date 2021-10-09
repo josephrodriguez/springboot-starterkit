@@ -1,4 +1,4 @@
-package com.gerimedica.springboot.data.entity;
+package com.josephrodriguez.learning.springboot.data.entity;
 
 import javax.persistence.*;
 import java.sql.Date;

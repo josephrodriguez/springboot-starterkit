@@ -1,13 +1,13 @@
-package com.gerimedica.springboot;
+package com.josephrodriguez.learning.springboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GerimedicaApplication {
+public class LearningSpringBootApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GerimedicaApplication.class, args);
+        SpringApplication.run(LearningSpringBootApplication.class, args);
     }
 
 }

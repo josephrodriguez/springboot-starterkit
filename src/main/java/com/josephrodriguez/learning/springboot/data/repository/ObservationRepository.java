@@ -1,6 +1,6 @@
-package com.gerimedica.springboot.data.repository;
+package com.josephrodriguez.learning.springboot.data.repository;
 
-import com.gerimedica.springboot.data.entity.Observation;
+import com.josephrodriguez.learning.springboot.data.entity.Observation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
