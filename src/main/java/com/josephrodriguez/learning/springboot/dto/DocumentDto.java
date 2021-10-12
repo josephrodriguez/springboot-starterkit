@@ -8,6 +8,8 @@ public class DocumentDto {
 
     private String codeListCode;
 
+    private String source;
+
     private String displayValue;
 
     private String longDescription;
@@ -16,9 +18,7 @@ public class DocumentDto {
 
     private Date to;
 
-    public DocumentDto(String code) {
-        this.code = code;
-    }
+    private Integer sortingPriority;
 
     public String getCode() {
         return code;
@@ -62,5 +62,25 @@ public class DocumentDto {
 
     public void setCodeListCode(String codeListCode) {
         this.codeListCode = codeListCode;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public Integer getSortingPriority() {
+        return sortingPriority;
+    }
+
+    public void setSortingPriority(Integer sortingPriority) {
+        this.sortingPriority = sortingPriority;
     }
 }
