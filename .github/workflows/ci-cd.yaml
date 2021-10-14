@@ -14,10 +14,7 @@ jobs:
 
       - name: Setup GitHub context
         id: context
-        run: echo "::set-output name=sha_8::$(git log -1 --pretty=%h)"
-
-      - name: Build docker image
-        run: echo "${{ steps.context.outputs.sha_8 }}"
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
 
       - name: Build docker image
         run: docker build -t $IMG_NAME -f ./Dockerfile .
@@ -35,4 +32,4 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
           tags: |
             ${{ env.IMG_NAME }}:latest
-            ${{ env.IMG_NAME }}:${{ steps.context.outputs.sha_8 }}
+            ${{ env.IMG_NAME }}:${{ steps.context.outputs.sha8 }}
