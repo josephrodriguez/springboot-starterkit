@@ -42,7 +42,7 @@ public class DownloadController {
 
         Iterable<CsvDocumentDto> documents = documentDaoService.getAll()
                 .stream()
-                .map(rest -> mapper.fromRest2CsvDocument(rest))
+                .map(rest -> mapper.fromDto2Csv(rest))
                 .collect(Collectors.toList());
 
         final String[] headers = { "source", "codeListCode", "code"};

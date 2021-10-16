@@ -16,6 +16,9 @@ jobs:
         id: context
         run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
 
+      - name: Log GitHub context
+        run: echo "${{ toJson(github) }}"
+
       - name: Build docker image
         run: docker build -t $IMG_NAME -f ./Dockerfile .
 

@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class RestDocumentDto {
+public class DocumentDto {
 
     private String code;
 
