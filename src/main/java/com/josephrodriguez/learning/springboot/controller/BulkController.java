@@ -40,7 +40,7 @@ public class BulkController {
         InputStreamReader input = new InputStreamReader(file.getInputStream(), "UTF-8");
         List<DocumentDto> documents = csvReaderService.read(input)
                 .stream()
-                .map(record -> mapper.fromCsv2RestDocument(record))
+                .map(record -> mapper.fromCsv2Dto(record))
                 .collect(Collectors.toList());
 
         List<DocumentDto> response = documentDaoService.saveAll(documents);

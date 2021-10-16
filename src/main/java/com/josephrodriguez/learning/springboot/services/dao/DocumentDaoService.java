@@ -5,10 +5,10 @@ import com.josephrodriguez.learning.springboot.data.repository.DocumentRepositor
 import com.josephrodriguez.learning.springboot.dto.http.DocumentDto;
 import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,7 +23,7 @@ public class DocumentDaoService {
     public List<DocumentDto> getAll() {
         final List<DocumentDto> result = repository.findAll()
                 .stream()
-                .map(entity -> mapper.fromDocumentEntity2Dto(entity))
+                .map(entity -> mapper.fromEntity2Dto(entity))
                 .collect(Collectors.toList());
 
         return result;
@@ -33,21 +33,29 @@ public class DocumentDaoService {
 
         List<Document> entities = documents
                 .stream()
-                .map(dto -> mapper.fromRestDocument2Entity(dto))
+                .map(dto -> mapper.fromDto2Entity(dto))
                 .collect(Collectors.toList());
 
         return repository.saveAll(entities)
                 .stream()
-                .map(entity -> mapper.fromDocumentEntity2Dto(entity))
+                .map(entity -> mapper.fromEntity2Dto(entity))
                 .collect(Collectors.toList());
     }
 
-    public Optional<DocumentDto> findById(String code) {
-        return null;
+    public DocumentDto findById(String code) throws ResourceNotFoundException {
+
+        Document entity = repository
+                .findById(code)
+                .orElseThrow(() -> new ResourceNotFoundException("Document not found on :: " + code));
+
+        return mapper.fromEntity2Dto(entity);
     }
 
-    public DocumentDto save(DocumentDto document) {
-        return null;
+    public DocumentDto save(DocumentDto dto) {
+
+        Document mappedEntity = mapper.fromDto2Entity(dto);
+        Document responseEntity = repository.save(mappedEntity);
+        return mapper.fromEntity2Dto(responseEntity);
     }
 
     public void deleteById(String code) {

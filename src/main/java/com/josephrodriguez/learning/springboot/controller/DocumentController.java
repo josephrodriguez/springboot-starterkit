@@ -1,6 +1,5 @@
 package com.josephrodriguez.learning.springboot.controller;
 
-import com.josephrodriguez.learning.springboot.data.entity.Document;
 import com.josephrodriguez.learning.springboot.dto.http.DocumentDto;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//Spring annotations
 @RestController
 @RequestMapping("/api")
 public class DocumentController {
@@ -28,10 +26,7 @@ public class DocumentController {
     public ResponseEntity<DocumentDto> getByCode(@PathVariable(value = "code") String code)
         throws ResourceNotFoundException {
 
-        DocumentDto document =
-                daoService
-                        .findById(code)
-                        .orElseThrow(() -> new ResourceNotFoundException("Document not found :: " + code));
+        DocumentDto document = daoService.findById(code);
 
         return ResponseEntity.ok().body(document);
     }
@@ -47,12 +42,7 @@ public class DocumentController {
             @PathVariable(value = "code") String code, @RequestBody DocumentDto document)
             throws ResourceNotFoundException {
 
-        DocumentDto documentDto =
-                daoService
-                        .findById(code)
-                        .orElseThrow(() -> new ResourceNotFoundException("Document not found on :: " + code));
-
-        final DocumentDto updatedObservation = daoService.save(document);
+        DocumentDto updatedObservation = daoService.save(document);
         return ResponseEntity.ok(updatedObservation);
     }
 
@@ -61,13 +51,10 @@ public class DocumentController {
     public ResponseEntity<DocumentDto> deleteByCode(@PathVariable(value = "code") String code)
         throws ResourceNotFoundException {
 
-        DocumentDto documentDto =
-                daoService
-                        .findById(code)
-                        .orElseThrow(() -> new ResourceNotFoundException("Document not found on :: " + code));
-
+        DocumentDto response = daoService.findById(code);
         daoService.deleteById(code);
-        return ResponseEntity.ok(documentDto);
+
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/documents")

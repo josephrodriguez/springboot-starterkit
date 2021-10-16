@@ -13,19 +13,19 @@ public class DefaultMapper {
     @Autowired
     private ModelMapper modelMapper;
 
-    public DocumentDto fromDocumentEntity2Dto(Document document) {
+    public DocumentDto fromEntity2Dto(Document document) {
         return modelMapper.map(document, DocumentDto.class);
     }
 
-    public Document fromRestDocument2Entity(DocumentDto restDocumentDto) {
+    public Document fromDto2Entity(DocumentDto restDocumentDto) {
         return modelMapper.map(restDocumentDto, Document.class);
     }
 
-    public DocumentDto fromCsv2RestDocument(CsvDocumentDto csvDocumentDto) {
+    public DocumentDto fromCsv2Dto(CsvDocumentDto csvDocumentDto) {
         return modelMapper.map(csvDocumentDto, DocumentDto.class);
     }
 
-    public CsvDocumentDto fromRest2CsvDocument(DocumentDto restDocumentDto) {
+    public CsvDocumentDto fromDto2Csv(DocumentDto restDocumentDto) {
         return modelMapper.map(restDocumentDto, CsvDocumentDto.class);
     }
 }
