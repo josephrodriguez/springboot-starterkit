@@ -1,10 +1,10 @@
-package com.gerimedica.springboot;
+package com.josephrodriguez.learning.springboot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class GerimedicaApplicationTests {
+class LearningSpringBootApplicationTests {
 
     @Test
     void contextLoads() {
