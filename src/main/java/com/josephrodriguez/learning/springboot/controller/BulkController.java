@@ -1,8 +1,7 @@
 package com.josephrodriguez.learning.springboot.controller;
 
-import com.josephrodriguez.learning.springboot.data.entity.Document;
-import com.josephrodriguez.learning.springboot.dto.csv.CsvDocumentDto;
 import com.josephrodriguez.learning.springboot.dto.http.RestDocumentDto;
+import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvReaderService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,30 +31,20 @@ public class BulkController {
     @Autowired
     private DocumentDaoService documentDaoService;
 
+    @Autowired
+    private DefaultMapper mapper;
+
     @PostMapping("/upload")
     public ResponseEntity<Iterable<RestDocumentDto>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
 
         InputStreamReader input = new InputStreamReader(file.getInputStream(), "UTF-8");
         List<RestDocumentDto> documents = csvReaderService.read(input)
                 .stream()
-                .map(this::map)
+                .map(record -> mapper.fromCsv2RestDocument(record))
                 .collect(Collectors.toList());
 
         List<RestDocumentDto> response = documentDaoService.saveAll(documents);
 
         return ResponseEntity.ok(response);
-    }
-
-    private RestDocumentDto map(CsvDocumentDto csvDocument) {
-        return RestDocumentDto.builder()
-                .source(csvDocument.getSource())
-                .codeListCode(csvDocument.getCodeListCode())
-                .code(csvDocument.getCode())
-                .displayValue(csvDocument.getDisplayValue())
-                .longDescription(csvDocument.getLongDescription())
-                .fromDate(csvDocument.getFromDate())
-                .toDate(csvDocument.getToDate())
-                .sortingPriority(csvDocument.getSortingPriority())
-                .build();
     }
 }

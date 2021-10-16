@@ -3,6 +3,7 @@ package com.josephrodriguez.learning.springboot.services.dao;
 import com.josephrodriguez.learning.springboot.data.entity.Document;
 import com.josephrodriguez.learning.springboot.data.repository.DocumentRepository;
 import com.josephrodriguez.learning.springboot.dto.http.RestDocumentDto;
+import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +16,13 @@ public class DocumentDaoService {
     @Autowired
     private DocumentRepository documentRepository;
 
+    @Autowired
+    private DefaultMapper mapper;
+
     public List<RestDocumentDto> getAll() {
         final List<RestDocumentDto> result = documentRepository.findAll()
                 .stream()
-                .map(this::map)
+                .map(entity -> mapper.fromDocumentEntity2Dto(entity))
                 .collect(Collectors.toList());
 
         return result;
@@ -28,38 +32,12 @@ public class DocumentDaoService {
 
         List<Document> entities = documents
                 .stream()
-                .map(this::map)
+                .map(dto -> mapper.fromRestDocument2Entity(dto))
                 .collect(Collectors.toList());
 
         return documentRepository.saveAll(entities)
                 .stream()
-                .map(this::map)
+                .map(entity -> mapper.fromDocumentEntity2Dto(entity))
                 .collect(Collectors.toList());
-    }
-
-    private RestDocumentDto map(Document doc) {
-        return RestDocumentDto.builder()
-                .source(doc.getSource())
-                .codeListCode(doc.getCodeListCode())
-                .code(doc.getCode())
-                .displayValue(doc.getDisplayValue())
-                .longDescription(doc.getLongDescription())
-                .fromDate(doc.getFromDate())
-                .toDate(doc.getToDate())
-                .sortingPriority(doc.getSortingPriority())
-                .build();
-    }
-
-    private Document map(RestDocumentDto doc) {
-        return Document.builder()
-                .source(doc.getSource())
-                .codeListCode(doc.getCodeListCode())
-                .code(doc.getCode())
-                .displayValue(doc.getDisplayValue())
-                .longDescription(doc.getLongDescription())
-                .fromDate(doc.getFromDate())
-                .toDate(doc.getToDate())
-                .sortingPriority(doc.getSortingPriority())
-                .build();
     }
 }

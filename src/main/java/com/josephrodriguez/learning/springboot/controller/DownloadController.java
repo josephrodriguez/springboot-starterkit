@@ -1,7 +1,7 @@
 package com.josephrodriguez.learning.springboot.controller;
 
 import com.josephrodriguez.learning.springboot.dto.csv.CsvDocumentDto;
-import com.josephrodriguez.learning.springboot.dto.http.RestDocumentDto;
+import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvWriterService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +30,9 @@ public class DownloadController {
     @Autowired
     private CsvWriterService csvWriterService;
 
+    @Autowired
+    private DefaultMapper mapper;
+
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadFile(
             @RequestHeader(name = "Content-disposition", defaultValue = "file.csv") final String fileName,
@@ -39,7 +42,7 @@ public class DownloadController {
 
         Iterable<CsvDocumentDto> documents = documentDaoService.getAll()
                 .stream()
-                .map(this::map)
+                .map(rest -> mapper.fromRest2CsvDocument(rest))
                 .collect(Collectors.toList());
 
         final String[] headers = { "source", "codeListCode", "code"};
@@ -50,18 +53,5 @@ public class DownloadController {
                 .header(HttpHeaders.CONTENT_DISPOSITION, fileName)
                 .contentType(MediaType.parseMediaType(mediaType))
                 .body(resource);
-    }
-
-    private CsvDocumentDto map(RestDocumentDto doc) {
-        return CsvDocumentDto.builder()
-                .source(doc.getSource())
-                .codeListCode(doc.getCodeListCode())
-                .code(doc.getCode())
-                .displayValue(doc.getDisplayValue())
-                .longDescription(doc.getLongDescription())
-                .fromDate(doc.getFromDate())
-                .toDate(doc.getToDate())
-                .sortingPriority(doc.getSortingPriority())
-                .build();
     }
 }
