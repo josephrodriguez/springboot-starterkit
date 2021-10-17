@@ -1,9 +1,10 @@
-FROM openjdk:8
-
-RUN apt-get update && apt-get install -y maven
+FROM openjdk:8-jdk-alpine
 COPY . /project
-RUN  cd /project && mvn package
+WORKDIR project
+RUN  chmod +x mvnw &&./mvnw --version && ./mvnw package
+RUN cd ./target && ls
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} learning-spring-boot.jar
 EXPOSE 8080
 
-#run the spring boot application
-ENTRYPOINT ["java","-jar","/project/target/learning-spring-boot-0.0.1.jar"]
+ENTRYPOINT ["java","-jar","/learning-spring-boot.jar"]

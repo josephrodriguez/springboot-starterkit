@@ -9,12 +9,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.josephrodriguez.learning.springboot</groupId>
-    <artifactId>learning-springboot</artifactId>
+    <artifactId>learning-spring-boot</artifactId>
     <version>0.0.1</version>
-    <name>learning-springboot</name>
+    <name>learning-spring-boot</name>
     <description>Basic project from scratch to learning Spring Boot</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
     <dependencies>
         <dependency>
