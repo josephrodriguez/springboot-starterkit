@@ -1,0 +1,15 @@
+#ignore .git and source folder
+/.git/
+/.github/
+
+#ignore IntelliJ IDEA folder
+/.idea/
+
+#ignore H2 database
+/data/
+
+#ignore README content
+*.md
+!README*.md
+/request.http
+

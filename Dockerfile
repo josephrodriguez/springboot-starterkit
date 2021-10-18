@@ -1,10 +1,10 @@
 FROM openjdk:8-jdk-alpine
-COPY . /project
-WORKDIR project
-RUN  chmod +x mvnw &&./mvnw --version && ./mvnw package
-RUN cd ./target && ls
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} learning-spring-boot.jar
+COPY . /usr/app
+WORKDIR /usr/app
+RUN chmod +x mvnw \
+    && ./mvnw --version \
+    && ./mvnw package
+COPY /target/*.jar app.jar
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/learning-spring-boot.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
