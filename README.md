@@ -1,168 +1,34 @@
 # Learning Spring Boot
-
-Hello, this was an exciting learning project on current technologies such as Spring Boot, Docker and GitHub actions in which I leave you my knowledge learned in this learning process in the hope that it will be useful to you. You will be able to find the main problems that you can present, as well as their solutions. Enjoy it.
-
-## Run
-
-- **IntelliJ IDEA 2021.2.2:**
-
-The setup configuration file can be found on `.run\LearningSpringBootApplication.run.xml`:
-
-```
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="LearningSpringBootApplication" type="Application" factoryName="Application">
-    <option name="ALTERNATIVE_JRE_PATH" value="BUNDLED" />
-    <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-    <option name="MAIN_CLASS_NAME" value="com.josephrodriguez.learning.springboot.LearningSpringBootApplication" />
-    <module name="Learning.SpringBoot" />
-    <method v="2">
-      <option name="Make" enabled="true" />
-    </method>
-  </configuration>
-</component>
-```
-
-- **Docker**
-
-Download and run with Docker image from Docker Hub:
-
-```
-docker run -p 8080:8080 josephrodriguez/learning-spring-boot
-```
-
-- **docker-compose**
-
-```
-docker-compose up
-```
+<p align="center">  
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/actions" alt="Actions">
+    <img src="https://github.com/josephrodriguez/learning-spring-boot/actions/workflows/ci-cd.yaml/badge.svg" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/graphs/contributors" alt="Contributors">
+        <img src="https://img.shields.io/github/contributors/josephrodriguez/learning-spring-boot" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/issues" alt="Contribution">
+    <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/pulse" alt="Activity">
+    <img src="https://img.shields.io/github/commit-activity/m/josephrodriguez/learning-spring-boot" />
+  </a>
+  <a href="https://snyk.io/test/github/josephrodriguez/learning-spring-boot" alt="Snyk">
+    <img src="https://snyk.io/test/github/josephrodriguez/learning-spring-boot/badge.svg" />
+  </a>
+  <a href="https://hub.docker.com/repository/docker/josephrodriguez/learning-spring-boot" alt="Docker">
+    <img src="https://img.shields.io/docker/pulls/josephrodriguez/learning-spring-boot.svg" />
+  </a>
+    <a href="https://hub.docker.com/layers/172724845/josephrodriguez/learning-spring-boot/e51118b8/images/sha256-a7c95f06eaa7d47fc3fb1f36dea50438e09c0eed7e0e6ec651cfe7f5adb5d3b8?context=repo" alt="Docker">
+    <img src="https://img.shields.io/badge/version-0.0.1-blue" />
+  </a>
+</p>      
 
 
-## REST Endpoint
+This was an exciting and experimental project on current technologies such as [Spring Boot](https://spring.io/projects/spring-boot), [Docker](https://www.docker.com/) and GitHub Actions. Here I leave you my knowledge learned in this process with the hope that it will be useful to you. You will be able to find the main problems that you can present, as well as their solutions. Enjoy it.
 
-The Tomcat embedded server is exposed by port 8080:
+## Wiki
 
-> ## GET
-
-**Request:**
-```
-GET http://localhost:8080/api/documents
-```
-
-**Response:**
-```
-[
-    {
-        "code": "271636001",
-        "codeListCode": "ZIB001",
-        "source": "ZIB",
-        "displayValue": "Polsslag regelmatig",
-        "longDescription": "The long description is necessary",
-        "fromDate": "2019-01-01",
-        "toDate": null,
-        "sortingPriority": 1
-    }
-]
-```
-
-> ## GET
-
-**Request:**
-```
-GET http://localhost:8080/api/documents/271636001
-```
-
-**Response:**
-```
-{
-    "code": "271636001",
-    "codeListCode": "ZIB001",
-    "source": "ZIB",
-    "displayValue": "Polsslag regelmatig",
-    "longDescription": "The long description is necessary",
-    "fromDate": "2019-01-01",
-    "toDate": null,
-    "sortingPriority": 1
-}
-```
-
-> ## POST 
-
-**Request:**
-```
-POST http://localhost:8080/api/documents/
-Content-Type: application/json
-
-{
-  "code": "415945006",
-  "codeListCode": "ZIB003",
-  "source": "ZIB",
-  "displayValue": "Orale temperatuur (onder de tong)",
-  "longDescription": "",
-  "fromDate": "2019-01-01",
-  "toDate": null,
-  "sortingPriority": 2
-}
-
-```
-
-**Response:**
-```
-{
-  "code": "415945006",
-  "codeListCode": "ZIB003",
-  "source": "ZIB",
-  "displayValue": "Orale temperatuur (onder de tong)",
-  "longDescription": "",
-  "fromDate": "2019-01-01",
-  "toDate": null,
-  "sortingPriority": 2
-}
-```
-
-> ## PUT
-
-**Request:**
-
-```
-PUT http://localhost:8080/api/documents/698832009
-Content-Type: application/json
-
-
-{
-    "code": "698832009",
-    "codeListCode": "ZIB003",
-    "source": "ZIB",
-    "displayValue": "Blaastemperatuur",
-    "longDescription": "",
-    "fromDate": "2019-01-01T00:00:00.000+00:00",
-    "toDate": null,
-    "sortingPriority": null
-}
-```
-
-**Response:**
-```
-{
-    "code": "698832009",
-    "codeListCode": "ZIB003",
-    "source": "ZIB",
-    "displayValue": "Blaastemperatuur",
-    "longDescription": "",
-    "fromDate": "2019-01-01T00:00:00.000+00:00",
-    "toDate": null,
-    "sortingPriority": null
-}
-```
-
-
-> ## DELETE
-
-**REquest:**
-```
-DELETE http://localhost:8080/api/documents/698832009
-```
-
-**Response:**
-```
-200
-```
+- [Environment](https://github.com/josephrodriguez/learning-spring-boot/wiki/Environment)
+- [JPA](https://github.com/josephrodriguez/learning-spring-boot/wiki/JPA) 
+- [REST endpoints](https://github.com/josephrodriguez/learning-spring-boot/wiki/REST)
+- [Run](https://github.com/josephrodriguez/learning-spring-boot/wiki/Run)
