@@ -1,15 +1,11 @@
-#ignore .git and source folder
 /.git/
 /.github/
-
-#ignore IntelliJ IDEA folder
 /.idea/
-
-#ignore H2 database
-/data/
-
-#ignore README content
+**/*.db
 *.md
-!README*.md
+/mvnw.cmd
+/docker-compose.yml
 /request.http
+.mvn/wrapper/maven-wrapper.jar
+**/.class
 

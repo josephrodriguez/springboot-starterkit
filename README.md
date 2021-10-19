@@ -1,4 +1,11 @@
-# Gerimedica
+# Learning Spring Boot
+
+Download and run with image from Docker Hub
+
+```
+docker run -p 8080:8080 josephrodriguez/learning-spring-boot
+```
+
 
 #GET
 http://localhost:8080/api/observations/271636001
