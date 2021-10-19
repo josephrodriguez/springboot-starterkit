@@ -1,9 +1,9 @@
-FROM openjdk:8
-
-RUN apt-get update && apt-get install -y maven
-COPY . /project
-RUN  cd /project && mvn package
+FROM openjdk:8-jdk-alpine as basebuild
 EXPOSE 8080
 
-#run the spring boot application
-ENTRYPOINT ["java","-jar","/project/target/learning-spring-boot-0.0.1.jar"]
+FROM basebuild as build
+COPY . /app
+WORKDIR /app
+RUN chmod +x mvnw && ./mvnw package
+
+ENTRYPOINT ["java","-jar","/app/target/learning-spring-boot-0.0.1.jar"]
