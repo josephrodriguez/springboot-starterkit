@@ -46,9 +46,12 @@ This was an exciting and experimental project on current technologies such as [S
 - [Run](https://github.com/josephrodriguez/learning-spring-boot/wiki/Run)
 
 
-<div>
-<img src="https://github-readme-stats.vercel.app/api?username=josephrodriguez&amp;count_private=true&amp;show_icons=true&amp;include_all_commits=true" alt="Github Stats">
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=aemmadi&amp;hide=TeX&amp;layout=compact" alt="Top Langs">
-</div>
-
-
+## Contact
+<p>
+    <a href="https://www.linkedin.com/in/josemiguelrodriguezgarcia-3a574866/" rel="nofollow">
+        <img src="https://img.shields.io/badge/-josephrodriguez-blue?style=flat-square&amp;logo=Linkedin&amp;logoColor=white&amp;link=https://www.linkedin.com/in/josemiguelrodriguezgarcia-3a574866/" alt="Linkedin Badge">
+    </a>
+    <a href="mailto:josemrodriguez89@gmail.com" rel="nofollow">
+        <img src="https://img.shields.io/badge/-josemrodriguez89@gmail.com-c14438?style=flat-square&amp;logo=Gmail&amp;logoColor=white&amp;link=mailto:kanna6501@gmail.com" alt="Gmail Badge">
+    </a>
+</p>
