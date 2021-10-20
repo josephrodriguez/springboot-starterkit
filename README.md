@@ -3,17 +3,26 @@
   <a href="https://github.com/josephrodriguez/learning-spring-boot/actions" alt="Actions">
     <img src="https://github.com/josephrodriguez/learning-spring-boot/actions/workflows/ci-cd.yaml/badge.svg" />
   </a>
-  <a href="https://github.com/josephrodriguez/learning-spring-boot/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/josephrodriguez/learning-spring-boot" />
-  </a>
   <a href="https://github.com/josephrodriguez/learning-spring-boot/issues" alt="Contribution">
     <img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/commits/main" alt="Last commit">
+    <img src="https://img.shields.io/github/last-commit/josephrodriguez/learning-spring-boot" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/pulls" alt="Pull requests">
+    <img src="https://img.shields.io/github/issues-pr-raw/josephrodriguez/learning-spring-boot" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/issues" alt="Pull requests">
+    <img src="https://img.shields.io/github/issues/josephrodriguez/learning-spring-boot" />
   </a>
   <a href="https://github.com/josephrodriguez/learning-spring-boot/pulse" alt="Activity">
     <img src="https://img.shields.io/github/commit-activity/m/josephrodriguez/learning-spring-boot" />
   </a>
-  <a href="https://snyk.io/test/github/josephrodriguez/learning-spring-boot" alt="Snyk">
-    <img src="https://snyk.io/test/github/josephrodriguez/learning-spring-boot/badge.svg" />
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/graphs/traffic" alt="Visits">
+    <img src="https://badges.pufler.dev/visits/josephrodriguez/learning-spring-boot" />
+  </a>
+  <a href="https://github.com/josephrodriguez/learning-spring-boot/graphs/contributors" alt="Contributors">
+    <img src="https://img.shields.io/github/contributors/josephrodriguez/learning-spring-boot" />
   </a>
   <a href="https://hub.docker.com/repository/docker/josephrodriguez/learning-spring-boot" alt="Docker">
     <img src="https://img.shields.io/docker/pulls/josephrodriguez/learning-spring-boot.svg" />
@@ -32,3 +41,5 @@ This was an exciting and experimental project on current technologies such as [S
 - [JPA](https://github.com/josephrodriguez/learning-spring-boot/wiki/JPA) 
 - [REST endpoints](https://github.com/josephrodriguez/learning-spring-boot/wiki/REST)
 - [Run](https://github.com/josephrodriguez/learning-spring-boot/wiki/Run)
+
+
