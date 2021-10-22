@@ -7,5 +7,4 @@
 /docker-compose.yml
 /request.http
 .mvn/wrapper/maven-wrapper.jar
-**/.class
-
+/.run/

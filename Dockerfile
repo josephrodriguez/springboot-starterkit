@@ -1,9 +1,10 @@
-FROM openjdk:8-jdk-alpine as basebuild
+FROM openjdk:8-jdk-alpine as build
+COPY . /usr/app
+WORKDIR /usr/app
+RUN chmod +x mvnw && ./mvnw clean package
+
+FROM openjdk:8-jre-alpine
+COPY --from=build /usr/app/target/*.jar app.jar
 EXPOSE 8080
 
-FROM basebuild as build
-COPY . /app
-WORKDIR /app
-RUN chmod +x mvnw && ./mvnw package
-
-ENTRYPOINT ["java","-jar","/app/target/learning-spring-boot-0.0.1.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
