@@ -1,12 +1,13 @@
-
 version: 2
 updates:
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "dev"
       
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "dev"
