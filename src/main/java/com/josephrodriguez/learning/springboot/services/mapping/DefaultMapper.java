@@ -1,4 +1,4 @@
-package com.josephrodriguez.learning.springboot.mapping;
+package com.josephrodriguez.learning.springboot.services.mapping;
 
 import com.josephrodriguez.learning.springboot.data.entity.Document;
 import com.josephrodriguez.learning.springboot.dto.csv.CsvDocumentDto;

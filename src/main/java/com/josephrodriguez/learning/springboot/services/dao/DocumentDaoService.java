@@ -3,7 +3,7 @@ package com.josephrodriguez.learning.springboot.services.dao;
 import com.josephrodriguez.learning.springboot.data.entity.Document;
 import com.josephrodriguez.learning.springboot.data.repository.DocumentRepository;
 import com.josephrodriguez.learning.springboot.dto.http.DocumentDto;
-import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
+import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
