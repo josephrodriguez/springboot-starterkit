@@ -14,27 +14,27 @@ import java.util.Date;
 @Data
 public class CsvDocumentDto {
 
-    @CsvColumn(column = "code")
-    private String code;
+    @CsvColumn
+    public String code;
 
-    @CsvColumn(column = "codeListCode", sort = 1)
+    @CsvColumn(sort = 1)
     private String codeListCode;
 
-    @CsvColumn(column = "source", sort = 1)
+    @CsvColumn(sort = 2)
     private String source;
 
-    @CsvColumn(column = "displayValue", sort = 2)
+    @CsvColumn(sort = 3)
     private String displayValue;
 
-    @CsvColumn(column = "longDescription", sort = 3)
+    @CsvColumn(sort = 4)
     private String longDescription;
 
-    @CsvColumn(column = "from_date", sort = 4)
+    @CsvColumn(column = "from_date", sort = 5)
     private Date fromDate;
 
-    @CsvColumn(column = "to_date", sort = 5)
+    @CsvColumn(column = "to_date", sort = 6)
     private Date toDate;
 
-    @CsvColumn(column = "sortPriority", sort = 6)
+    @CsvColumn(sort = 7)
     private Integer sortingPriority;
 }

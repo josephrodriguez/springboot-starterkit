@@ -1,7 +1,7 @@
 package com.josephrodriguez.learning.springboot.controller;
 
 import com.josephrodriguez.learning.springboot.dto.http.DocumentDto;
-import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
+import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvReaderService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
 import lombok.extern.slf4j.Slf4j;
