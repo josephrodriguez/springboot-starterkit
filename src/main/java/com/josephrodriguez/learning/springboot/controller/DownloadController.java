@@ -1,7 +1,7 @@
 package com.josephrodriguez.learning.springboot.controller;
 
 import com.josephrodriguez.learning.springboot.dto.csv.CsvDocumentDto;
-import com.josephrodriguez.learning.springboot.mapping.DefaultMapper;
+import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvWriterService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
 import lombok.extern.slf4j.Slf4j;
@@ -45,8 +45,8 @@ public class DownloadController {
                 .map(rest -> mapper.fromDto2Csv(rest))
                 .collect(Collectors.toList());
 
-        final String[] headers = { "source", "codeListCode", "code"};
-        ByteArrayInputStream inputStream = csvWriterService.write(documents, headers);
+        ByteArrayInputStream inputStream = csvWriterService.write(documents, CsvDocumentDto.class);
+
         final InputStreamResource resource = new InputStreamResource(inputStream);
 
         return ResponseEntity.ok()
