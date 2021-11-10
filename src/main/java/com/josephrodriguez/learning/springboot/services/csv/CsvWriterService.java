@@ -15,55 +15,58 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
-//Lombok annotation
 @Slf4j
-//Spring annotation
 @Service
 public class CsvWriterService {
 
-    public ByteArrayInputStream write(Iterable<CsvDocumentDto> documents, String... headers) {
+    private HashMap<Class<?>, Iterable<ColumnMapping>> columnMap;
+
+    public CsvWriterService() {
+        columnMap = new HashMap<>();
+    }
+
+    public <T> ByteArrayInputStream write(Iterable<T> rows, Class<T> clazz) {
+
+        Iterable<ColumnMapping> columns = columnMap.computeIfAbsent(clazz,
+                cl -> Arrays.stream(clazz.getDeclaredFields())
+                        .map(CsvWriterService::getMapping)
+                        .sorted(Comparator.comparingInt(ColumnMapping::getSort))
+                        .collect(Collectors.toList()));
+
+        String[] headers = StreamSupport.stream(columns.spliterator(), false)
+                .map(cl -> cl.header)
+                .toArray(String[]::new);
 
         CSVFormat format = CSVFormat.DEFAULT.withHeader(headers);
 
         try(ByteArrayOutputStream stream = new ByteArrayOutputStream();
             CSVPrinter printer = new CSVPrinter(new PrintWriter(stream), format)) {
 
-            for (CsvDocumentDto doc : documents) {
-                List<String> record = Arrays.asList(
-                        doc.getSource(),
-                        doc.getCodeListCode(),
-                        doc.getCode(),
-                        doc.getDisplayValue(),
-                        doc.getLongDescription(),
-                        String.valueOf(doc.getFromDate()),
-                        String.valueOf(doc.getToDate()),
-                        String.valueOf(doc.getSortingPriority())
-                );
+            for(T row : rows) {
+                List<String> record = new ArrayList<>();
+
+                for (final ColumnMapping column : columns) {
+                    column.field.setAccessible(true);
+
+                    try {
+                        Object value = column.field.get(row);
+                        record.add(String.valueOf(value));
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+
                 printer.printRecord(record);
             }
             printer.flush();
-
             return new ByteArrayInputStream(stream.toByteArray());
         } catch (IOException e) {
             throw new RuntimeException("Csv writing error: " + e.getMessage());
         }
-    }
-
-    public <T> ByteArrayInputStream write(Iterable<T> rows, Class<T> clazz) {
-
-        Iterable<ColumnMapping> columns = Arrays.stream(clazz.getDeclaredFields())
-                .map(CsvWriterService::getMapping)
-                .sorted(Comparator.comparingInt(ColumnMapping::getSort))
-                .collect(Collectors.toList());
-
-        for(T row : rows) {
-        }
-        return null;
     }
 
     static ColumnMapping getMapping(Field field) {
