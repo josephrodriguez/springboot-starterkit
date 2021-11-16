@@ -1,6 +1,8 @@
 package com.josephrodriguez.learning.springboot.controller;
 
-import com.josephrodriguez.learning.springboot.dto.http.DocumentDto;
+import com.josephrodriguez.learning.springboot.dto.csv.DocumentCsvDto;
+import com.josephrodriguez.learning.springboot.dto.http.DocumentRestDto;
+import com.josephrodriguez.learning.springboot.exceptions.CsvException;
 import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvReaderService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
@@ -26,7 +28,7 @@ import java.util.stream.Collectors;
 public class BulkController {
 
     @Autowired
-    private CsvReaderService csvReaderService;
+    private CsvReaderService csvReader;
 
     @Autowired
     private DocumentDaoService documentDaoService;
@@ -35,15 +37,16 @@ public class BulkController {
     private DefaultMapper mapper;
 
     @PostMapping("/upload")
-    public ResponseEntity<Iterable<DocumentDto>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException {
+    public ResponseEntity<Iterable<DocumentRestDto>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException, CsvException {
+        log.info("Logging");
 
         InputStreamReader input = new InputStreamReader(file.getInputStream(), "UTF-8");
-        List<DocumentDto> documents = csvReaderService.read(input)
+        final List<DocumentRestDto> documents = csvReader.read(input, DocumentCsvDto.class)
                 .stream()
-                .map(record -> mapper.fromCsv2Dto(record))
+                .map(record -> mapper.fromCsv2Rest(record))
                 .collect(Collectors.toList());
 
-        List<DocumentDto> response = documentDaoService.saveAll(documents);
+        List<DocumentRestDto> response = documentDaoService.saveAll(documents);
 
         return ResponseEntity.ok(response);
     }

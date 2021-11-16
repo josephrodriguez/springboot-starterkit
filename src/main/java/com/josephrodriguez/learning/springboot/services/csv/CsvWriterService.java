@@ -1,9 +1,6 @@
 package com.josephrodriguez.learning.springboot.services.csv;
 
-import com.josephrodriguez.learning.springboot.annotation.CsvColumn;
-import com.josephrodriguez.learning.springboot.utils.StringFuncs;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import com.josephrodriguez.learning.springboot.exceptions.CsvException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
@@ -13,32 +10,30 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Field;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
 public class CsvWriterService {
 
-    private HashMap<Class<?>, Iterable<ColumnMapping>> columnMap;
-    private Field column;
+    private final CsvColumnMapper csvMapper;
 
-    public CsvWriterService() {
+    private final HashMap<Class<?>, List<CsvColumnMapping>> columnMap;
+
+    public CsvWriterService(CsvColumnMapper csvMapper) {
         columnMap = new HashMap<>();
+        this.csvMapper = csvMapper;
     }
 
-    public <T> ByteArrayInputStream write(Iterable<T> rows, Class<T> clazz) {
+    public <T> ByteArrayInputStream write(List<T> rows, Class<T> clazz) throws CsvException {
 
-        Iterable<ColumnMapping> columns = columnMap.computeIfAbsent(clazz,
-                cl -> Arrays.stream(clazz.getDeclaredFields())
-                        .map(CsvWriterService::getMapping)
-                        .sorted(Comparator.comparingInt(ColumnMapping::getSort))
-                        .collect(Collectors.toList()));
+        List<CsvColumnMapping> classMapping = columnMap.computeIfAbsent(clazz, csvMapper::getClassMapping);
 
-        String[] headers = StreamSupport.stream(columns.spliterator(), false)
-                .map(cl -> cl.header)
+        String[] headers = classMapping.stream()
+                .map(CsvColumnMapping::getHeader)
                 .toArray(String[]::new);
 
         CSVFormat format = CSVFormat.DEFAULT.withHeader(headers);
@@ -47,7 +42,7 @@ public class CsvWriterService {
             CSVPrinter printer = new CSVPrinter(new PrintWriter(stream), format)) {
 
             StreamSupport.stream(rows.spliterator(), false)
-                    .map(row -> getRecord(row, columns))
+                    .map(row -> getRecord(row, classMapping))
                     .forEach(record -> {
                         try {
                             printer.printRecord(record);
@@ -60,27 +55,19 @@ public class CsvWriterService {
 
             return new ByteArrayInputStream(stream.toByteArray());
         } catch (IOException e) {
-            throw new RuntimeException("Csv writing error: " + e.getMessage());
+            throw new CsvException("Csv writing error: " + e.getMessage());
         }
     }
 
-    private static ColumnMapping getMapping(Field field) {
-        CsvColumn annotation = field.getAnnotation(CsvColumn.class);
-        int sort = annotation.sort();
-        String header = StringFuncs.thenIfEmpty(annotation.column(), field.getName());
-
-        return new ColumnMapping(field, sort, header);
-    }
-
-    private static <T> List<String> getRecord(T row, Iterable<ColumnMapping> columns) {
+    private <T> List<String> getRecord(T row, List<CsvColumnMapping> csvColumnMappings) {
         final List<String> record = new ArrayList<>();
 
-        for (final ColumnMapping column : columns) {
-            column.field.setAccessible(true);
+        for (CsvColumnMapping csvColumnMapping : csvColumnMappings) {
+            csvColumnMapping.getField().setAccessible(true);
             Object value = null;
 
             try {
-                value = column.field.get(row);
+                value = csvColumnMapping.getField().get(row);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
@@ -89,13 +76,5 @@ public class CsvWriterService {
         }
 
         return record;
-    }
-
-    @Getter
-    @RequiredArgsConstructor
-    static class ColumnMapping {
-        private final Field field;
-        private final int sort;
-        private final String header;
     }
 }
