@@ -1,18 +1,14 @@
 package com.josephrodriguez.learning.springboot.dto.csv;
 
 import com.josephrodriguez.learning.springboot.annotation.CsvColumn;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CsvDocumentDto {
+public class DocumentCsvDto {
 
     @CsvColumn
     public String code;

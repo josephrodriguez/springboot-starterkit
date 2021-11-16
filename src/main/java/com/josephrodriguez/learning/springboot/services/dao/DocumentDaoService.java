@@ -1,8 +1,8 @@
 package com.josephrodriguez.learning.springboot.services.dao;
 
-import com.josephrodriguez.learning.springboot.data.entity.Document;
+import com.josephrodriguez.learning.springboot.data.entity.DocumentEntity;
 import com.josephrodriguez.learning.springboot.data.repository.DocumentRepository;
-import com.josephrodriguez.learning.springboot.dto.http.DocumentDto;
+import com.josephrodriguez.learning.springboot.dto.http.DocumentRestDto;
 import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
@@ -20,8 +20,8 @@ public class DocumentDaoService {
     @Autowired
     private DefaultMapper mapper;
 
-    public List<DocumentDto> getAll() {
-        final List<DocumentDto> result = repository.findAll()
+    public List<DocumentRestDto> getAll() {
+        final List<DocumentRestDto> result = repository.findAll()
                 .stream()
                 .map(entity -> mapper.fromEntity2Dto(entity))
                 .collect(Collectors.toList());
@@ -29,11 +29,11 @@ public class DocumentDaoService {
         return result;
     }
 
-    public List<DocumentDto> saveAll(List<DocumentDto> documents) {
+    public List<DocumentRestDto> saveAll(List<DocumentRestDto> documents) {
 
-        List<Document> entities = documents
+        List<DocumentEntity> entities = documents
                 .stream()
-                .map(dto -> mapper.fromDto2Entity(dto))
+                .map(dto -> mapper.fromRest2Entity(dto))
                 .collect(Collectors.toList());
 
         return repository.saveAll(entities)
@@ -42,19 +42,19 @@ public class DocumentDaoService {
                 .collect(Collectors.toList());
     }
 
-    public DocumentDto findById(String code) throws ResourceNotFoundException {
+    public DocumentRestDto findById(String code) throws ResourceNotFoundException {
 
-        Document entity = repository
+        DocumentEntity entity = repository
                 .findById(code)
-                .orElseThrow(() -> new ResourceNotFoundException("Document not found on :: " + code));
+                .orElseThrow(() -> new ResourceNotFoundException("DocumentEntity not found on :: " + code));
 
         return mapper.fromEntity2Dto(entity);
     }
 
-    public DocumentDto save(DocumentDto dto) {
+    public DocumentRestDto save(DocumentRestDto dto) {
 
-        Document mappedEntity = mapper.fromDto2Entity(dto);
-        Document responseEntity = repository.save(mappedEntity);
+        DocumentEntity mappedEntity = mapper.fromRest2Entity(dto);
+        DocumentEntity responseEntity = repository.save(mappedEntity);
         return mapper.fromEntity2Dto(responseEntity);
     }
 
