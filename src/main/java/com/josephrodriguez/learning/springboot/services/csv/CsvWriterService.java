@@ -30,19 +30,19 @@ public class CsvWriterService {
 
     public <T> ByteArrayInputStream write(List<T> rows, Class<T> clazz) throws CsvException {
 
-        List<CsvColumnMapping> classMapping = columnMap.computeIfAbsent(clazz, csvMapper::getClassMapping);
+        List<CsvColumnMapping> csvClassMapping = columnMap.computeIfAbsent(clazz, csvMapper::getClassMapping);
 
-        String[] headers = classMapping.stream()
+        String[] headers = csvClassMapping.stream()
                 .map(CsvColumnMapping::getHeader)
                 .toArray(String[]::new);
 
-        CSVFormat format = CSVFormat.DEFAULT.withHeader(headers);
+        CSVFormat format = CSVFormat.DEFAULT. builder().setHeader(headers).build();
 
         try(ByteArrayOutputStream stream = new ByteArrayOutputStream();
             CSVPrinter printer = new CSVPrinter(new PrintWriter(stream), format)) {
 
             StreamSupport.stream(rows.spliterator(), false)
-                    .map(row -> getRecord(row, classMapping))
+                    .map(row -> getRecord(row, csvClassMapping))
                     .forEach(record -> {
                         try {
                             printer.printRecord(record);
