@@ -42,7 +42,7 @@ public class DownloadController {
 
         List<DocumentCsvDto> documents = documentDaoService.getAll()
                 .stream()
-                .map(rest -> mapper.fromDto2Csv(rest))
+                .map(rest -> mapper.fromRest2Csv(rest))
                 .collect(Collectors.toList());
 
         ByteArrayInputStream inputStream = csvWriter.write(documents, DocumentCsvDto.class);

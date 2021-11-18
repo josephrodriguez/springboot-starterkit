@@ -25,7 +25,7 @@ public class DefaultMapper {
         return modelMapper.map(document, DocumentRestDto.class);
     }
 
-    public DocumentCsvDto fromDto2Csv(DocumentRestDto restDocumentDto) {
-        return modelMapper.map(restDocumentDto, DocumentCsvDto.class);
+    public DocumentCsvDto fromRest2Csv(DocumentRestDto restDto) {
+        return modelMapper.map(restDto, DocumentCsvDto.class);
     }
 }

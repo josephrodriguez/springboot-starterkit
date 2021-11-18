@@ -25,10 +25,10 @@ public class DocumentCsvDto {
     @CsvColumn(sort = 4)
     private String longDescription;
 
-    @CsvColumn(column = "from_date", sort = 5)
+    @CsvColumn(column = "fromDate", sort = 5)
     private Date fromDate;
 
-    @CsvColumn(column = "to_date", sort = 6)
+    @CsvColumn(column = "toDate", sort = 6)
     private Date toDate;
 
     @CsvColumn(sort = 7)

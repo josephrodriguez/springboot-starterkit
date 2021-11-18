@@ -41,7 +41,7 @@ public class BulkController {
         log.info("Logging");
 
         InputStreamReader input = new InputStreamReader(file.getInputStream(), "UTF-8");
-        final List<DocumentRestDto> documents = csvReader.read(input, DocumentCsvDto.class)
+        List<DocumentRestDto> documents = csvReader.read(input, DocumentCsvDto.class)
                 .stream()
                 .map(record -> mapper.fromCsv2Rest(record))
                 .collect(Collectors.toList());
