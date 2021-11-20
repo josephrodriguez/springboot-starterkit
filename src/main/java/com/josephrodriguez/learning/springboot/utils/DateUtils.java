@@ -9,7 +9,7 @@ public class DateUtils {
     private final static SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
     public static Date parse(String value) {
-        if(StringUtils.isNullOrEmpty(value)) return null;
+        if(StringFuncs.isNullOrEmpty(value)) return null;
 
         try {
             return format.parse(value);
