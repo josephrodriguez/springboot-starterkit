@@ -17,7 +17,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 @Data
-public class Document {
+public class DocumentEntity {
 
     @Id
     @Column(name = "code")

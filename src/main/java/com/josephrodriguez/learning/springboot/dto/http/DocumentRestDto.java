@@ -1,18 +1,18 @@
-package com.josephrodriguez.learning.springboot.dto.csv;
+package com.josephrodriguez.learning.springboot.dto.http;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-//Lombok annotations
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class CsvDocumentDto {
+public class DocumentRestDto {
 
     private String code;
 
@@ -24,8 +24,10 @@ public class CsvDocumentDto {
 
     private String longDescription;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fromDate;
 
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date toDate;
 
     private Integer sortingPriority;
