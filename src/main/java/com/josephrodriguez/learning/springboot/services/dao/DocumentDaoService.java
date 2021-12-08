@@ -4,6 +4,7 @@ import com.josephrodriguez.learning.springboot.data.entity.DocumentEntity;
 import com.josephrodriguez.learning.springboot.data.repository.DocumentRepository;
 import com.josephrodriguez.learning.springboot.dto.http.DocumentRestDto;
 import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
@@ -12,13 +13,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class DocumentDaoService {
 
-    @Autowired
-    private DocumentRepository repository;
-
-    @Autowired
-    private DefaultMapper mapper;
+    private final DocumentRepository repository;
+    private final DefaultMapper mapper;
 
     public List<DocumentRestDto> getAll() {
         final List<DocumentRestDto> result = repository.findAll()
