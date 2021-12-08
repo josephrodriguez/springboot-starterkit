@@ -8,6 +8,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface CsvColumn {
+
     String column() default "";
     int sort() default 0;
 }

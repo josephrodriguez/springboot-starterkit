@@ -6,8 +6,8 @@ import com.josephrodriguez.learning.springboot.exceptions.CsvException;
 import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvReaderService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,21 +20,15 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Lombok annotations
 @Slf4j
-//Spring annotations
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class BulkController {
 
-    @Autowired
-    private CsvReaderService csvReader;
-
-    @Autowired
-    private DocumentDaoService documentDaoService;
-
-    @Autowired
-    private DefaultMapper mapper;
+    private final CsvReaderService csvReader;
+    private final DocumentDaoService documentDaoService;
+    private final DefaultMapper mapper;
 
     @PostMapping("/upload")
     public ResponseEntity<Iterable<DocumentRestDto>> uploadFile(@RequestParam("file") MultipartFile file) throws IOException, CsvException {
