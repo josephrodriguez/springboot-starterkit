@@ -5,8 +5,8 @@ import com.josephrodriguez.learning.springboot.exceptions.CsvException;
 import com.josephrodriguez.learning.springboot.services.mapping.DefaultMapper;
 import com.josephrodriguez.learning.springboot.services.csv.CsvWriterService;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -22,18 +22,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class DownloadController {
 
-    @Autowired
-    private DocumentDaoService documentDaoService;
-
-    @Autowired
-    private CsvWriterService csvWriter;
-
-    @Autowired
-    private DefaultMapper mapper;
+    private final DocumentDaoService documentDaoService;
+    private final CsvWriterService csvWriter;
+    private final DefaultMapper mapper;
 
     @GetMapping("/download")
     public ResponseEntity<Resource> downloadFile(
