@@ -2,7 +2,7 @@ package com.josephrodriguez.learning.springboot.controller;
 
 import com.josephrodriguez.learning.springboot.dto.http.DocumentRestDto;
 import com.josephrodriguez.learning.springboot.services.dao.DocumentDaoService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api")
 public class DocumentController {
 
-    @Autowired
-    private DocumentDaoService daoService;
+    private final DocumentDaoService daoService;
 
     @GetMapping("/documents")
     public List<DocumentRestDto> getAll() {
