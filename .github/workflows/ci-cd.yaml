@@ -17,6 +17,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name: Info
+        run: echo "${{ toJson(github) }}"
 
       - name: Docker metadata
         id: metadata
@@ -39,5 +42,5 @@ jobs:
         with:
           context: .
           push: ${{ github.event.base_ref =='refs/heads/main' && github.ref_type == 'tag' && !startsWith(github.ref, 'refs/tags/v0.')}}
-          tags: ${{ steps.metadata.output.tags }}
-          labels: ${{ steps.metadata.output.labels }}
+          tags: ${{ steps.metadata.outputs.tags }}
+          labels: ${{ steps.metadata.outputs.labels }}
