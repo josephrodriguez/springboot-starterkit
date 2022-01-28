@@ -30,9 +30,12 @@
 </p>   
 
 <div align="center">
-    <img src="https://img.shields.io/badge/-Spring%20Boot-white?style=flat&logo=springboot" />
-    <img src="https://img.shields.io/badge/-Docker-1572B6?style=flat-square&amp;logo=docker" alt="Docker">
-    <img src="https://img.shields.io/badge/-java-E34A86?style=flat-square&amp;logo=java" alt="Java">
+    <a alt="Java">
+        <img src="https://img.shields.io/badge/Java-v1.8-orange.svg" />
+    </a>
+    <a alt="Spring Boot">
+        <img src="https://img.shields.io/badge/Spring%20Boot-v2.6.3-brightgreen.svg" />
+    </a>
 </div>
 
 
