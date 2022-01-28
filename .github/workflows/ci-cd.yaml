@@ -17,9 +17,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        
-      - name: Info
-        run: echo "${{ toJson(github) }}"
 
       - name: Docker metadata
         id: metadata
