@@ -19,31 +19,33 @@
     <img src="https://visitor-badge.laobi.icu/badge?page_id=josephrodriguez" />
   </a>
   <a href="https://github.com/josephrodriguez/learning-spring-boot/graphs/contributors" alt="Contributors">
-    <img src="https://img.shields.io/github/contributors/josephrodriguez/learning-spring-boot" />
+    <img src="https://img.shields.io/github/contributors/josephrodriguez/springboot-starterkit" />
   </a>
-  <a href="https://hub.docker.com/repository/docker/josephrodriguez/learning-spring-boot" alt="Docker">
-    <img src="https://img.shields.io/docker/pulls/josephrodriguez/learning-spring-boot.svg" />
+  <a href="https://hub.docker.com/repository/docker/josephrodriguez/springboot-starterkit" alt="Docker">
+    <img src="https://img.shields.io/docker/pulls/josephrodriguez/springboot-starterkit.svg" />
   </a>
   <a href="https://hub.docker.com/layers/172724845/josephrodriguez/learning-spring-boot/e51118b8/images/sha256-a7c95f06eaa7d47fc3fb1f36dea50438e09c0eed7e0e6ec651cfe7f5adb5d3b8?context=repo" alt="Docker">
-    <img src="https://img.shields.io/badge/version-0.0.1-blue" />
+    <img src="https://img.shields.io/badge/version-1.0.1-blue" />
   </a>
 </p>   
 
 <div align="center">
-    <img src="https://img.shields.io/badge/-Spring%20Boot-white?style=flat&logo=springboot" />
-    <img src="https://img.shields.io/badge/-Docker-1572B6?style=flat-square&amp;logo=docker" alt="Docker">
-    <img src="https://img.shields.io/badge/-java-E34A86?style=flat-square&amp;logo=java" alt="Java">
+    <a alt="Java">
+        <img src="https://img.shields.io/badge/Java-v1.8-orange.svg" />
+    </a>
+    <a alt="Spring Boot">
+        <img src="https://img.shields.io/badge/Spring%20Boot-v2.6.3-brightgreen.svg" />
+    </a>
 </div>
 
 
-This was an exciting and experimental project on current technologies such as [Spring Boot](https://spring.io/projects/spring-boot), [Docker](https://www.docker.com/) and GitHub Actions. Here I leave you my knowledge learned in this process with the hope that it will be useful to you. You will be able to find the main problems that you can present, as well as their solutions. Enjoy it.
+This is a very exciting [Spring Boot](https://spring.io/projects/spring-boot) 's kata project that shows the principal features of this framework. Also the integrations with modern technologies like [GitHub Actions](https://docs.github.com/en/actions), [Docker](https://www.docker.com/) and [Kubernetes](https://kubernetes.io/). Enjoy it!!!
 
 ## Wiki
 
-- [Environment](https://github.com/josephrodriguez/learning-spring-boot/wiki/Environment)
-- [JPA](https://github.com/josephrodriguez/learning-spring-boot/wiki/JPA) 
-- [REST endpoints](https://github.com/josephrodriguez/learning-spring-boot/wiki/REST)
-- [Run](https://github.com/josephrodriguez/learning-spring-boot/wiki/Run)
+- [Environment](https://github.com/josephrodriguez/springboot-starterkit/wiki/Environment)
+- [REST endpoints](https://github.com/josephrodriguez/springboot-starterkit/wiki/REST)
+- [Run](https://github.com/josephrodriguez/springboot-starterkit/wiki/Run)
 
 
 ## Contact

@@ -1,10 +1,10 @@
-package com.josephrodriguez.learning.springboot;
+package com.josephrodriguez.springboot.starterkit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class LearningSpringBootApplicationTests {
+class SpringBootStarterKitApplicationTests {
 
     @Test
     void contextLoads() {
