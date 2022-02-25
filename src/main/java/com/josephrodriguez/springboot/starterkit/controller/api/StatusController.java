@@ -1,4 +1,4 @@
-package com.josephrodriguez.springboot.starterkit.controller;
+package com.josephrodriguez.springboot.starterkit.controller.api;
 
 import com.josephrodriguez.springboot.starterkit.responses.StatusResponse;
 import lombok.extern.slf4j.Slf4j;

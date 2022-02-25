@@ -1,10 +1,10 @@
 /.git/
 /.github/
 /.idea/
-**/*.db
 *.md
 /mvnw.cmd
 /docker-compose.yml
 /request.http
 .mvn/wrapper/maven-wrapper.jar
 /.run/
+/target/
