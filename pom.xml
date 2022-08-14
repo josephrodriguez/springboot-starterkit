@@ -10,11 +10,13 @@
     </parent>
     <groupId>springboot-starterkit</groupId>
     <artifactId>springboot-starterkit</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.3</version>
     <name>springboot-starterkit</name>
     <description>Basic Spring Boot starting project</description>
     <properties>
         <java.version>11</java.version>
+        <sonar.organization>josephrodriguez</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
     <dependencies>
         <dependency>
