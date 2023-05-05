@@ -5,3 +5,5 @@
 /docker-compose.yml
 /request.http
 /.run/
+target/
+**/*.cmd
