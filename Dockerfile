@@ -1,10 +1,11 @@
-FROM openjdk:11.0.15-jdk-slim as build
+FROM eclipse-temurin:17-jdk-alpine as build
 COPY . /usr/app
 WORKDIR /usr/app
 RUN chmod +x mvnw && ./mvnw clean package
 
-FROM openjdk:11.0.15-jre-slim
-COPY --from=build /usr/app/target/*.jar app.jar
+FROM eclipse-temurin:17-jre-alpine
+RUN apk update && apk upgrade && mkdir /app
+COPY --from=build /usr/app/target/*.jar /app/com.springboot.starterkit.jar
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/com.springboot.starterkit.jar"]
