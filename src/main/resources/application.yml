@@ -1,0 +1,24 @@
+management:
+  endpoints:
+    enabled-by-default: false
+    web:
+      exposure:
+        include: health,info,env,beans
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+    env:
+      enabled: true
+    beans:
+      enabled: true
+
+springdoc:
+  version: '@springdoc.version@v1.1.0'
+  show-actuator: true
+  swagger-ui:
+    display-request-duration: true
+    groups-order: ASC
+    operationsSorter: method
+    use-root-path: true
