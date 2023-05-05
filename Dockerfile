@@ -4,7 +4,8 @@ WORKDIR /usr/app
 RUN chmod +x mvnw && ./mvnw clean package
 
 FROM eclipse-temurin:17-jre-alpine
-COPY --from=build /usr/app/target/*.jar app.jar
+RUN apk update && apk upgrade && mkdir /app
+COPY --from=build /usr/app/target/*.jar /app/com.springboot.starterkit.jar
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-jar", "/app/com.springboot.starterkit.jar"]
