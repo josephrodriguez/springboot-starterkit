@@ -16,3 +16,16 @@
 
 The intention of this project was a simple Kata project to learn Spring Boot and it ended up being what it is today. 
 A door to introduce you to the set of the main functionalities of this technology and integration with advanced execution tools of containers and orchestration like Docker and Kubernetes.
+
+## Run
+
+Run the docker container:
+
+`docker run -p 8080:8080 josephrodriguez/springboot-starterkit`
+
+Open the browser:
+
+http://localhost:8080
+
+![image](https://user-images.githubusercontent.com/4713082/236581257-dda8d9fd-4889-481a-a0bf-ba826ae565d6.png)
+
