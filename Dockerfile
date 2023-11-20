@@ -1,10 +1,10 @@
-FROM eclipse-temurin:20-jdk-alpine as build
+FROM amazoncorretto:21.0.1 as build
 COPY . /usr/app
 WORKDIR /usr/app
 RUN chmod +x mvnw && ./mvnw clean package
 
-FROM eclipse-temurin:20-jre-alpine
-RUN apk update && apk upgrade && mkdir /app
+FROM amazoncorretto:21.0.1-alpine3.18
+RUN mkdir /app
 COPY --from=build /usr/app/target/*.jar /app/com.springboot.starterkit.jar
 EXPOSE 8080
 

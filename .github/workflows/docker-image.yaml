@@ -16,7 +16,7 @@ jobs:
       IMG_NAME: ${{ github.repository }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.0.0
+        uses: actions/checkout@v4.1.1
 
       - name: Info
         run: echo "Parameters. ${{ github.event.base_ref }}, ${{ github.ref_type }}, ${{ github.ref }}"
@@ -46,7 +46,7 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
 
       - name: Create release
-        uses: josephrodriguez/swift-release@v1
+        uses: josephrodriguez/swift-release@v1.1
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
