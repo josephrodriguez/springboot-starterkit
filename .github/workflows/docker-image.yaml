@@ -46,7 +46,7 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
 
       - name: Create release
-        uses: josephrodriguez/swift-release@v1
+        uses: josephrodriguez/swift-release@v1.1
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

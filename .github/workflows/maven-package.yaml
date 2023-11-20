@@ -29,7 +29,7 @@ jobs:
       run: mvn --batch-mode clean package --file pom.xml "-Dartifact.version=${{ steps.vars.outputs.sha8 }}"
       
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
+      uses: codecov/codecov-action@v3
       with:
         directory: ./target/jacoco-report
         flags: unittests
