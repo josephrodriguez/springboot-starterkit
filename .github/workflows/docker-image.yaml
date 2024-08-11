@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build & push docker image
-    runs-on: mend-runner-label-1
+    runs-on: mend-white-src-scan-runner-label-1
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
