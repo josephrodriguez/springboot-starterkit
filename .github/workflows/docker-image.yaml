@@ -10,8 +10,10 @@ on:
       - '*'
 jobs:
   build:
-    name: Build & push docker image
-    runs-on: mend-white-src-scan-runner-label-1
+    runs-on: ubuntu-latest
+    container:
+      image: node:14 # or any image that includes the required versions
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      # Additional steps here
