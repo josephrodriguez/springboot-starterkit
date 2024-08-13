@@ -60,8 +60,8 @@ jobs:
           echo docker.includes=isavara.latest >> .github/utils/ws-scan/bigfix-whitesource.config
           echo docker.excludes=.*gelk >> .github/utils/ws-scan/bigfix-whitesource.config
           
-      -name: Eco bigfix whitesource config file
-       run: |
+      - name: Eco bigfix whitesource config file
+        run: |
          cat .github/utils/ws-scan/bigfix-whitesource.config
          
       - name: Scan        
