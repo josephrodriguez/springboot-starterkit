@@ -52,7 +52,7 @@ jobs:
           java-package: jre    
           
       - name: Scan        
-          run: |
+        run: |
             echo 'Downloading Mend Unified Agent'
             curl -LJ -o wss-unified-agent.jar https://unified-agent.s3.amazonaws.com/wss-unified-agent-24.4.1.jar
             if [[ "$(shasum -a 256 wss-unified-agent.jar)" == *"1fa165de6d70aa8662f4511ce6164be6c0072a6829fb105c93970f28db1a74ef"* ]] ; then
