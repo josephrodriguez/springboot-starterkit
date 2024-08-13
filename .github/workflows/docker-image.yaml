@@ -57,7 +57,7 @@ jobs:
       - name: Append lines to bigfix-whitesource.config
         run: |
           echo docker.scanImages=true >> .github/utils/ws-scan/bigfix-whitesource.config
-          echo docker.includes=bigfix.latest >> .github/utils/ws-scan/bigfix-whitesource.config
+          echo docker.includes=isavara.latest >> .github/utils/ws-scan/bigfix-whitesource.config
           echo docker.excludes=.*gelk >> .github/utils/ws-scan/bigfix-whitesource.config
         
       - name: Scan        
