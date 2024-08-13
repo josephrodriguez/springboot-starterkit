@@ -42,3 +42,24 @@ jobs:
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          
+ 
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          java-package: jre    
+          
+      - name: Scan        
+          run: |
+            echo 'Downloading Mend Unified Agent'
+            curl -LJ -o wss-unified-agent.jar https://unified-agent.s3.amazonaws.com/wss-unified-agent-24.4.1.jar
+            if [[ "$(shasum -a 256 wss-unified-agent.jar)" == *"1fa165de6d70aa8662f4511ce6164be6c0072a6829fb105c93970f28db1a74ef"* ]] ; then
+              echo 'Integrity Check Passed'
+              echo 'Starting Mend Scan'
+              java -jar wss-unified-agent.jar -c .github/utils/ws-scan/bigfix-whitesource.config -project Rome-BigFix-docker
+            else
+              echo 'Integrity Check Failed'
+              exit 1
+            fi    
