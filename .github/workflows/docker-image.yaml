@@ -67,7 +67,7 @@ jobs:
             if [[ "$(shasum -a 256 wss-unified-agent.jar)" == *"1fa165de6d70aa8662f4511ce6164be6c0072a6829fb105c93970f28db1a74ef"* ]] ; then
               echo 'Integrity Check Passed'
               echo 'Starting Mend Scan'
-              #java -jar wss-unified-agent.jar -c .github/utils/ws-scan/bigfix-whitesource.config -project Rome-BigFix-docker
+              java -jar wss-unified-agent.jar -c .github/utils/ws-scan/bigfix-whitesource.config -project Rome-BigFix-docker
             else
               echo 'Integrity Check Failed'
               exit 1
