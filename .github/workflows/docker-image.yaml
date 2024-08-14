@@ -17,64 +17,14 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: mend-white-src-scan
-          
-          
-      - name: Docker metadata
-        id: metadata
-        uses: docker/metadata-action@v3
-        with:
-          images: ${{ github.repository }}
-          tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=raw,value=dev-{{date 'YYYYMMDDhhmm'}}.{{sha}},enable=${{ github.ref_type != 'tag' }}    
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: ${{ startsWith(github.ref, 'refs/tags/') }}
-          tags: latest
-          labels: ${{ steps.metadata.outputs.labels }}
-          
- 
-      - name: Install Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: "temurin"
-          java-version: "17"
-          java-package: jre    
       
       - name: Present working directory        
         run: pwd 
 
-      - name: Append lines to bigfix-whitesource.config
+      - name: Tag Docker images with "GHA"
         run: |
-          echo docker.scanImages=true >> .github/utils/ws-scan/bigfix-whitesource.config
-          echo docker.includes=isavara.*latest* >> .github/utils/ws-scan/bigfix-whitesource.config
-          echo docker.excludes=.*gelk >> .github/utils/ws-scan/bigfix-whitesource.config
-          
-      - name: Eco bigfix whitesource config file
-        run: |
-         cat .github/utils/ws-scan/bigfix-whitesource.config
-         
-      - name: Scan        
-        run: |
-            echo 'Downloading Mend Unified Agent'
-            curl -LJ -o wss-unified-agent.jar https://unified-agent.s3.amazonaws.com/wss-unified-agent-24.4.1.jar
-            if [[ "$(shasum -a 256 wss-unified-agent.jar)" == *"1fa165de6d70aa8662f4511ce6164be6c0072a6829fb105c93970f28db1a74ef"* ]] ; then
-              echo 'Integrity Check Passed'
-              echo 'Print bigfix-whitesource.config'
-              cat .github/utils/ws-scan/bigfix-whitesource.config 
-              echo 'Starting Mend Scan'
-              java -jar wss-unified-agent.jar -c .github/utils/ws-scan/bigfix-whitesource.config -project Rome-BigFix-docker
-            else
-              echo 'Integrity Check Failed'
-              exit 1
-            fi    
+          IMAGES=$(docker images --filter "label=GHA" --format "{{.Repository}}:latest")
+          for IMAGE in $IMAGES; do
+            docker tag $IMAGE ${IMAGE%:latest}:GHA
+            docker push ${IMAGE%:latest}:GHA
+          done
