@@ -23,7 +23,7 @@ jobs:
 
       - name: Tag Docker images with "GHA"
         run: |
-          IMAGES=$(docker images --filter "label=GHA" --format "{{.Repository}}:latest")
+          IMAGES=$(docker images --format "{{.Repository}}:latest")
           for IMAGE in $IMAGES; do
             docker tag $IMAGE ${IMAGE%:latest}:GHA
             docker push ${IMAGE%:latest}:GHA
