@@ -19,14 +19,27 @@ jobs:
           ref: mend-white-src-scan
       
       - name: Present working directory        
-        run: pwd 
+        run: pwd
+
+      - name: List Docker images with 'latest' tag
+        id: list-images
+        run: |
+          IMAGES=$(docker images --format "{{.Repository}}:latest" | sort | uniq)
+          if [ -z "$IMAGES" ]; then
+            echo "No Docker images with 'latest' tag found."
+            exit 1
+          else
+            echo "Docker images with 'latest' tag found:"
+            echo "$IMAGES"
+          fi        
 
       - name: Tag Docker images with "GHA"
         run: |
-          IMAGES=$(docker images --format "{{.Repository}}:latest")          
+          IMAGES=$(docker images --format "{{.Repository}}:latest" | sort | uniq)       
           for IMAGE in $IMAGES; do
-            echo "Inside for loop..."
+            echo "Inside for loop...IMAGE==="
             echo $IMAGE
             echo "docker tag $IMAGE ${IMAGE%:latest}:GHA"            
-            docker tag $IMAGE ${IMAGE%:latest}:GHA            
+            docker tag $IMAGE ${IMAGE%:latest}:GHA
+            docker rmi $IMAGE            
           done
