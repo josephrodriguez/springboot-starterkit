@@ -23,11 +23,10 @@ jobs:
 
       - name: Tag Docker images with "GHA"
         run: |
-          IMAGES=$(docker images --format "{{.Repository}}:latest")
-          echo "IMAGES .................. $IMAGES"
+          IMAGES=$(docker images --format "{{.Repository}}:latest")          
           for IMAGE in $IMAGES; do
             echo "Inside for loop..."
-            echo $IMAGES
+            echo $IMAGE
             echo "docker tag $IMAGE ${IMAGE%:latest}:GHA"            
             docker tag $IMAGE ${IMAGE%:latest}:GHA            
           done
