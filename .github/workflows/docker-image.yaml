@@ -35,7 +35,7 @@ jobs:
 
       - name: Tag Docker images with "GHA"
         run: |
-          IMAGES=$(docker images --format "{{.Repository}}:latest" | sort | uniq)       
+          IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}" | grep ':latest' | sort | uniq)       
           for IMAGE in $IMAGES; do
             echo "Inside for loop...IMAGE==="
             echo $IMAGE
