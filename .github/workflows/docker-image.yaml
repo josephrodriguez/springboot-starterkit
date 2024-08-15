@@ -43,11 +43,6 @@ jobs:
           if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
             MD_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
 
-            # Escape special characters and format for GitHub
-            MD_CONTENT="${MD_CONTENT//'%'/'%25'}"
-            MD_CONTENT="${MD_CONTENT//$'\n'/'%0A'}"
-            MD_CONTENT="${MD_CONTENT//$'\r'/'%0D'}"
-
             # Check if there's an existing comment by the same author
             echo "Checking for existing comments by the same author..."
             COMMENTS=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq ".comments[].author.login")
@@ -64,6 +59,7 @@ jobs:
           else
             echo "Markdown file not found."
           fi
+
 
       - name: Run Whitesource scan is Checked
         if: steps.check-flags.outputs.flag_a == 'true'
