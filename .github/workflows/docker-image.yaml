@@ -43,9 +43,12 @@ jobs:
           if [ -f /home/itadmin/ws_report/whitesource_scan_urls.html ]; then
             HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.html)
 
-            # Fetch existing comments and filter for the one with the specific content
+            # Fetch all comments on the PR
             PR_NUMBER=${{ github.event.pull_request.number }}
-            COMMENT_ID=$(gh pr view $PR_NUMBER --json comments --jq '.comments[] | select(.body | contains("Whitesource scan report")) | .id' || true)
+            COMMENTS=$(gh pr view $PR_NUMBER --json comments --jq '.comments')
+
+            # Check if there's an existing comment with the specified content
+            COMMENT_ID=$(echo "$COMMENTS" | jq -r --arg body "$HTML_CONTENT" '.[] | select(.body == $body) | .id' || true)
 
             if [ -n "$COMMENT_ID" ]; then
               echo "Updating existing comment..."
