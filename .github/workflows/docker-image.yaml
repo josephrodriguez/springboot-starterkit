@@ -17,7 +17,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: mend-white-src-scan
+          ref: |
+            mend-white-src-scan
+            ${{ github.event.pull_request.head.ref }} 
       
       - name: Present working directory        
         run: pwd
