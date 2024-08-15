@@ -34,17 +34,17 @@ jobs:
         env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-        # Ensure gh CLI is installed and authenticated
-        echo "Checking GitHub CLI installation..."
-        gh --version
+            # Ensure gh CLI is installed and authenticated
+            echo "Checking GitHub CLI installation..."
+            gh --version
 
-        # Read the HTML content and comment on the PR
-        if [ -f /home/itadmin/ws_report/whitesource_scan_urls.html ]; then
-          HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.html)
-          gh pr comment ${{ github.event.pull_request.number }} --body "$HTML_CONTENT"
-        else
-          echo "HTML file not found."
-        fi
+            # Read the HTML content and comment on the PR
+            if [ -f /home/itadmin/ws_report/whitesource_scan_urls.html ]; then
+              HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.html)
+              gh pr comment ${{ github.event.pull_request.number }} --body "$HTML_CONTENT"
+            else
+              echo "HTML file not found."
+            fi
           
       - name: Run Whitesource scan is Checked
         if: steps.check-flags.outputs.flag_a == 'true'
