@@ -1,8 +1,3 @@
-## Description
-<!--- Describe your changes in detail -->
-
-## Checklist
-
 - [ ] Dockerfile updated in uembuilds
 - [ ] golang libraries updated in jfrog
 - [ ] npm libraries updated in jfrog
@@ -16,6 +11,3 @@
 - [ ] Git rebase done for the branch
 - [ ] Tests run and screenshots attached
 - [ ] Run Whitesource scan
-
-<!-- Please make sure you have filled out the checklist above before submitting your PR -->
-
