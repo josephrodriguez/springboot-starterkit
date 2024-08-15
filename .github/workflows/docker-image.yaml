@@ -40,8 +40,8 @@ jobs:
           gh --version
 
           # Read the HTML content
-          if [ -f /home/itadmin/ws_report/whitesource_scan_urls.html ]; then
-           HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.html)
+          if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
+           HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
 
            # Check if there's an existing comment by the same author
            echo "Checking for existing comments by the same author..."
