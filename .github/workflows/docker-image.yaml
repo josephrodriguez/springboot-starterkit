@@ -30,16 +30,6 @@ jobs:
           if echo "$PR_BODY" | grep -q "Run Whitesource scan"; then
             echo "::set-output name=flag_a::true"
           fi
-          
-      - name: Test
-        uses: actions/github-script@0.3.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const core = require('@actions/core')
-            const prNumber = context.payload.number;
-            core.exportVariable('PULL_NUMBER23', prNumber);
-
         
       - name: Get Pull Request Number
         id: pr
@@ -58,10 +48,8 @@ jobs:
 
             # Extract PR number from the event payload
             #PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
-            #echo "Pull Request Number: $PR_NUMBER"
-            
-            echo "PULL_NUMBER23.....................Pull Request Number: $PULL_NUMBER23"
-            
+            #echo "Pull Request Number: $PR_NUMBER"            
+           
             PR_NUMBER0=${{ steps.pr.outputs.pull_request_number }}
             echo "0.....................Pull Request Number: $PR_NUMBER0"
             
