@@ -35,30 +35,44 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          # Ensure gh CLI is installed and authenticated
-          echo "Checking GitHub CLI installation..."
-          gh --version
+            # Ensure gh CLI is installed and authenticated
+            echo "Checking GitHub CLI installation..."
+            gh --version
 
-          # Read the Markdown content
-          if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
-            MD_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
+            # Read the Markdown content
+            if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
+              echo "Markdown file found. Reading content..."
+              MD_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
+              
+              echo "Markdown content:"
+              echo "$MD_CONTENT"
 
-            # Check if there's an existing comment by the same author
-            echo "Checking for existing comments by the same author..."
-            COMMENTS=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq ".comments[].author.login")
+              # Check if there's an existing comment by the same author
+              echo "Checking for existing comments by the same author..."
+              COMMENTS=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq ".comments[].author.login")
+              
+              echo "Existing comments by authors:"
+              echo "$COMMENTS"
 
-            if echo "$COMMENTS" | grep -q "$(gh api user | jq -r .login)"; then
-              # Update the last comment
-              echo "Updating the last comment by the same author..."
-              gh pr comment ${{ github.event.pull_request.number }} --edit-last --body "$MD_CONTENT"
+              CURRENT_USER=$(gh api user | jq -r .login)
+              echo "Current GitHub user:"
+              echo "$CURRENT_USER"
+
+              if echo "$COMMENTS" | grep -q "$CURRENT_USER"; then
+                # Update the last comment
+                echo "Updating the last comment by the same author..."
+                gh pr comment ${{ github.event.pull_request.number }} --edit-last --body "$MD_CONTENT"
+                echo "Comment updated."
+              else
+                # Create a new comment
+                echo "Creating a new comment..."
+                gh pr comment ${{ github.event.pull_request.number }} --body "$MD_CONTENT"
+                echo "New comment created."
+              fi
             else
-              # Create a new comment
-              echo "Creating a new comment..."
-              gh pr comment ${{ github.event.pull_request.number }} --body "$MD_CONTENT"
+              echo "Markdown file not found."
             fi
-          else
-            echo "Markdown file not found."
-          fi
+
 
 
       - name: Run Whitesource scan is Checked
