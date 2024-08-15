@@ -53,6 +53,12 @@ jobs:
             #PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
             #echo "Pull Request Number: $PR_NUMBER"            
            
+            PR_NUMBER_1=${{ github.event.pull_request.number }} 
+            PR_NUMBER_2=${{ github.event.issue.number }}
+            
+            echo "PR_NUMBER_1    Pull Request Number: $PR_NUMBER_1" 
+            echo "PR_NUMBER_2    Pull Request Number: $PR_NUMBER_2" 
+            
             PR_NUMBER=${{ steps.pr.outputs.pull_request_number }}
             echo "Pull Request Number: $PR_NUMBER"
 
