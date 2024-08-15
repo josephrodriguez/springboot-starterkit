@@ -8,6 +8,7 @@ on:
       - main
       - 'v*.*'
       - '*'
+
 jobs:
   build:
     name: Build & push docker image
@@ -29,7 +30,7 @@ jobs:
           if echo "$PR_BODY" | grep -q "Run Whitesource scan"; then
             echo "::set-output name=flag_a::true"
           fi
-      
+
       - name: Convert HTML to Markdown and Comment added
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -37,14 +38,26 @@ jobs:
           # Ensure gh CLI is installed and authenticated
           echo "Checking GitHub CLI installation..."
           gh --version
-          # Read the HTML content and comment on the PR
+
+          # Read the HTML content
           if [ -f /home/itadmin/ws_report/whitesource_scan_urls.html ]; then
             HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.html)
-            gh pr comment ${{ github.event.pull_request.number }} --body "$HTML_CONTENT"
+
+            # Fetch existing comments and filter for the one with the specific content
+            PR_NUMBER=${{ github.event.pull_request.number }}
+            COMMENT_ID=$(gh pr view $PR_NUMBER --json comments --jq '.comments[] | select(.body | contains("Whitesource scan report")) | .id' || true)
+
+            if [ -n "$COMMENT_ID" ]; then
+              echo "Updating existing comment..."
+              gh pr comment $PR_NUMBER --update $COMMENT_ID --body "$HTML_CONTENT"
+            else
+              echo "Adding new comment..."
+              gh pr comment $PR_NUMBER --body "$HTML_CONTENT"
+            fi
           else
             echo "HTML file not found."
           fi
-          
+
       - name: Run Whitesource scan is Checked
         if: steps.check-flags.outputs.flag_a == 'true'
         run: echo "Running Whitesource scan"
