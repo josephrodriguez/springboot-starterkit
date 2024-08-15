@@ -31,7 +31,7 @@ jobs:
             echo "::set-output name=flag_a::true"
           fi
 
-            - name: Convert HTML to Markdown and Comment added
+      - name: Convert HTML to Markdown and Comment added
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
