@@ -1,0 +1,21 @@
+## Description
+<!--- Describe your changes in detail -->
+
+## Checklist
+
+- [ ] Dockerfile updated in uembuilds
+- [ ] golang libraries updated in jfrog
+- [ ] npm libraries updated in jfrog
+- [ ] docker dependencies updated in jfrog
+- [ ] VSCode golint checks, formatting, spellchecks are done
+- [ ] VSCode app scan checks done
+- [ ] VSCode static analysis done
+- [ ] Developer builds triggered and green without issues
+- [ ] Branch naming conventions followed
+- [ ] Githooks integrated in repository
+- [ ] Git rebase done for the branch
+- [ ] Tests run and screenshots attached
+- [ ] Run Whitesource scan
+
+<!-- Please make sure you have filled out the checklist above before submitting your PR -->
+
