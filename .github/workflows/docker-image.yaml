@@ -31,12 +31,6 @@ jobs:
             echo "::set-output name=flag_a::true"
           fi
 
-      - name: Get Pull Request Number
-        id: pr
-        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
       - name: Convert HTML to Markdown and Comment added
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
@@ -44,6 +38,10 @@ jobs:
             # Ensure gh CLI is installed and authenticated
             echo "Checking GitHub CLI installation..."
             gh --version
+
+            # Get the current PR number
+            PR_NUMBER=${{ github.event.pull_request.number }}
+            echo "Pull Request Number: $PR_NUMBER"
 
             # Read the Markdown content
             if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
@@ -55,7 +53,7 @@ jobs:
 
               # Check if there's an existing comment by the same author
               echo "Checking for existing comments by the same author..."
-              COMMENTS=$(gh pr view ${{ github.event.number }} --json comments --jq ".comments[].author.login")
+              COMMENTS=$(gh pr view "$PR_NUMBER" --json comments --jq ".comments[].author.login")
               
               echo "Existing comments by authors:"
               echo "$COMMENTS"
@@ -65,19 +63,20 @@ jobs:
               echo "$CURRENT_USER"
 
               if echo "$COMMENTS" | grep -q "$CURRENT_USER"; then
-                # Update the last commentTT
+                # Update the last comment by the same author
                 echo "Updating the last comment by the same author..."
-                gh pr comment ${{ github.event.number }} --edit-last --body "$MD_CONTENT"
+                gh pr comment "$PR_NUMBER" --edit-last --body "$MD_CONTENT"
                 echo "Comment updated."
               else
                 # Create a new comment
                 echo "Creating a new comment..."
-                gh pr comment ${{ github.event.number }} --body "$MD_CONTENT"
+                gh pr comment "$PR_NUMBER" --body "$MD_CONTENT"
                 echo "New comment created."
               fi
             else
               echo "Markdown file not found."
             fi
+
 
 
 
