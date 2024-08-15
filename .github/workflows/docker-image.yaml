@@ -31,7 +31,7 @@ jobs:
             echo "::set-output name=flag_a::true"
           fi
 
-      - name: Convert HTML to Markdown and Comment added
+            - name: Convert HTML to Markdown and Comment added
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
@@ -43,20 +43,9 @@ jobs:
           if [ -f /home/itadmin/ws_report/whitesource_scan_urls.html ]; then
             HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.html)
 
-            # Fetch all comments on the PR
-            PR_NUMBER=${{ github.event.pull_request.number }}
-            COMMENTS=$(gh pr view $PR_NUMBER --json comments --jq '.comments')
-
-            # Check if there's an existing comment with the specified content
-            COMMENT_ID=$(echo "$COMMENTS" | jq -r --arg body "$HTML_CONTENT" '.[] | select(.body == $body) | .id' || true)
-
-            if [ -n "$COMMENT_ID" ]; then
-              echo "Updating existing comment..."
-              gh pr comment $PR_NUMBER --update $COMMENT_ID --body "$HTML_CONTENT"
-            else
-              echo "Adding new comment..."
-              gh pr comment $PR_NUMBER --body "$HTML_CONTENT"
-            fi
+            # Check if there's an existing comment by the same author and update it
+            echo "Updating the last comment by the same author..."
+            gh pr comment ${{ github.event.pull_request.number }} --edit-last --body "$HTML_CONTENT"
           else
             echo "HTML file not found."
           fi
