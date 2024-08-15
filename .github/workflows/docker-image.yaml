@@ -28,7 +28,13 @@ jobs:
           echo "PR Body: $PR_BODY"
           if echo "$PR_BODY" | grep -q "Run Whitesource scan"; then
             echo "::set-output name=flag_a::true"
-          fi   
+          fi
+      
+      - name: Install GitHub CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install gh -y
+          
       - name: Convert HTML to Markdown and Comment
         run: |
           #html_to_markdown=$(cat /home/itadmin/mend-runner/report/whitesource_scan_urls.html | html-to-markdown)
