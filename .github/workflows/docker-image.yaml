@@ -33,9 +33,12 @@ jobs:
         
       - name: Get Pull Request Number
         id: pr
-        run: echo "::set-output name=pull_request_number::$(gh pr view --json number -q .number || echo "")"
+        run: |
+          PR_NUMBER=$(gh pr view --json number -q .number)
+          echo "Pull Request Number: $PR_NUMBER"
+          echo "::set-output name=pull_request_number::$PR_NUMBER"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
           
           
       - name: Convert HTML to Markdown and Comment added
@@ -50,14 +53,8 @@ jobs:
             #PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
             #echo "Pull Request Number: $PR_NUMBER"            
            
-            PR_NUMBER0=${{ steps.pr.outputs.pull_request_number }}
-            echo "0.....................Pull Request Number: $PR_NUMBER0"
-            
-            PR_NUMBER1=${{ github.event.number }}
-            echo "1.....................Pull Request Number: $PR_NUMBER1"
-            
-            PR_NUMBER=${{ github.event.pull_request.number }}
-            echo "2.....................Pull Request Number: $PR_NUMBER"
+            PR_NUMBER=${{ steps.pr.outputs.pull_request_number }}
+            echo "Pull Request Number: $PR_NUMBER"
 
             # Read the Markdown content
             if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
