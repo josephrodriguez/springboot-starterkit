@@ -35,6 +35,8 @@ jobs:
           #html_to_markdown=$(cat /home/itadmin/mend-runner/report/whitesource_scan_urls.html | html-to-markdown)
           #echo "$html_to_markdown" > report.md
           gh pr comment ${{ github.event.pull_request.number }} --body "$(cat /home/itadmin/mend-runner/report/whitesource_scan_urls.html)"
+          env:
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }
 
       - name: Run Whitesource scan is Checked
         if: steps.check-flags.outputs.flag_a == 'true'
