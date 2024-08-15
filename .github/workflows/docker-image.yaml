@@ -39,6 +39,8 @@ jobs:
             echo "Checking GitHub CLI installation..."
             gh --version
 
+            pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+            echo "SUCCESS PULL NUMBER......$pull_number"
             # Get the current PR number
             PR_NUMBER=${{ github.event.pull_request.number }}
             echo "Pull Request Number: $PR_NUMBER"
