@@ -39,27 +39,31 @@ jobs:
           echo "Checking GitHub CLI installation..."
           gh --version
 
-          # Read the HTML content
+          # Read the Markdown content
           if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
-           HTML_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
+            MD_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
 
-           # Check if there's an existing comment by the same author
-           echo "Checking for existing comments by the same author..."
-           COMMENTS=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq ".comments[].author.login")
+            # Escape special characters and format for GitHub
+            MD_CONTENT="${MD_CONTENT//'%'/'%25'}"
+            MD_CONTENT="${MD_CONTENT//$'\n'/'%0A'}"
+            MD_CONTENT="${MD_CONTENT//$'\r'/'%0D'}"
 
-           if echo "$COMMENTS" | grep -q "$(gh api user | jq -r .login)"; then
-            # Update the last comment
-            echo "Updating the last comment by the same author..."
-            gh pr comment ${{ github.event.pull_request.number }} --edit-last --body "$HTML_CONTENT"
-           else
-            # Create a new comment
-            echo "Creating a new comment..."
-            gh pr comment ${{ github.event.pull_request.number }} --body "$HTML_CONTENT"
-           fi
+            # Check if there's an existing comment by the same author
+            echo "Checking for existing comments by the same author..."
+            COMMENTS=$(gh pr view ${{ github.event.pull_request.number }} --json comments --jq ".comments[].author.login")
+
+            if echo "$COMMENTS" | grep -q "$(gh api user | jq -r .login)"; then
+              # Update the last comment
+              echo "Updating the last comment by the same author..."
+              gh pr comment ${{ github.event.pull_request.number }} --edit-last --body "$MD_CONTENT"
+            else
+              # Create a new comment
+              echo "Creating a new comment..."
+              gh pr comment ${{ github.event.pull_request.number }} --body "$MD_CONTENT"
+            fi
           else
-           echo "HTML file not found."
+            echo "Markdown file not found."
           fi
-
 
       - name: Run Whitesource scan is Checked
         if: steps.check-flags.outputs.flag_a == 'true'
