@@ -58,6 +58,8 @@ jobs:
            
             PR_NUMBER_1=${{ env.PULL_NUMBER }}
            
+            GIT_ENV=${{ github.event.pull_request.head.ref }}
+            echo "1....................GIT_ENV............$GIT_ENV"
             
             echo "PR_NUMBER_1    Pull Request Number: $PR_NUMBER_1" 
           
