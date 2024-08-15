@@ -39,10 +39,8 @@ jobs:
             echo "Checking GitHub CLI installation..."
             gh --version
 
-            pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-            echo "SUCCESS PULL NUMBER......$pull_number"
-            # Get the current PR number
-            PR_NUMBER=${{ github.event.pull_request.number }}
+            # Extract PR number from the event payload
+            PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
             echo "Pull Request Number: $PR_NUMBER"
 
             # Read the Markdown content
@@ -55,7 +53,7 @@ jobs:
 
               # Check if there's an existing comment by the same author
               echo "Checking for existing comments by the same author..."
-              COMMENTS=$(gh pr view "$PR_NUMBER" --json comments --jq ".comments[].author.login")
+              COMMENTS=$(gh pr view $PR_NUMBER --json comments --jq ".comments[].author.login")
               
               echo "Existing comments by authors:"
               echo "$COMMENTS"
@@ -65,19 +63,20 @@ jobs:
               echo "$CURRENT_USER"
 
               if echo "$COMMENTS" | grep -q "$CURRENT_USER"; then
-                # Update the last comment by the same author
+                # Update the last comment
                 echo "Updating the last comment by the same author..."
-                gh pr comment "$PR_NUMBER" --edit-last --body "$MD_CONTENT"
+                gh pr comment $PR_NUMBER --edit-last --body "$MD_CONTENT"
                 echo "Comment updated."
               else
                 # Create a new comment
                 echo "Creating a new comment..."
-                gh pr comment "$PR_NUMBER" --body "$MD_CONTENT"
+                gh pr comment $PR_NUMBER --body "$MD_CONTENT"
                 echo "New comment created."
               fi
             else
               echo "Markdown file not found."
             fi
+
 
 
 
