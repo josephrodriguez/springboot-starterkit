@@ -59,7 +59,7 @@ jobs:
               echo "$CURRENT_USER"
 
               if echo "$COMMENTS" | grep -q "$CURRENT_USER"; then
-                # Update the last comment
+                # Update the last commentTT
                 echo "Updating the last comment by the same author..."
                 gh pr comment ${{ github.event.pull_request.number }} --edit-last --body "$MD_CONTENT"
                 echo "Comment updated."
