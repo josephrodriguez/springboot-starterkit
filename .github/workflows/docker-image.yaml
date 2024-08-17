@@ -49,6 +49,10 @@ jobs:
           LOG_DIR=$(ls -td /home/itadmin/mend-runner/bigfix-docker/whitesource/*/ | head -n 1)
           echo "Log directory found: $LOG_DIR"
           echo "::set-output name=log_dir::$LOG_DIR"
+          
+      - name: Make utility.sh Executable
+        run: chmod +x /home/itadmin/mend-runner/actions-runner/_work/springboot-starterkit/springboot-starterkit/.github/utils/scripts/utility.sh
+          
 
       - name: Run Utility Script with Whitesource Log
         run: |
