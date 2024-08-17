@@ -42,94 +42,17 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           
-      - name: Get Pull Request Number
-        run: echo "PULL_NUMBER=$(echo "$GITHUB_REF" | awk -F / '{print $3}')" >> $GITHUB_ENV
-        shell: bash
-        
-      - name: Convert HTML to Markdown and Comment added
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-            # Ensure gh CLI is installed and authenticated
-            echo "Checking GitHub CLI installation..."
-            gh --version
-
-            # Extract PR number from the event payload
-            #PR_NUMBER=$(jq -r .pull_request.number "$GITHUB_EVENT_PATH")
-            #echo "Pull Request Number: $PR_NUMBER"            
-           
-            PR_NUMBER_1=${{ env.PULL_NUMBER }}
-           
-            GIT_ENV=${{ github.event.pull_request.head.ref }}
-            echo "1....................GIT_ENV............$GIT_ENV"
-            
-            echo "PR_NUMBER_1    Pull Request Number: $PR_NUMBER_1" 
           
-            
-            PR_NUMBER=${{ steps.pr.outputs.pull_request_number }}
-            echo "Pull Request Number: $PR_NUMBER"
+      - name: Find Whitesource Log Directory
+        id: find-log-dir
+        run: |
+          LOG_DIR=$(ls -td /home/itadmin/mend-runner/bigfix-docker/whitesource/*/ | head -n 1)
+          echo "Log directory found: $LOG_DIR"
+          echo "::set-output name=log_dir::$LOG_DIR"
 
-            # Read the Markdown content
-            if [ -f /home/itadmin/ws_report/whitesource_scan_urls.md ]; then
-              echo "Markdown file found. Reading content..."
-              MD_CONTENT=$(cat /home/itadmin/ws_report/whitesource_scan_urls.md)
-              
-              echo "Markdown content:"
-              echo "$MD_CONTENT"
-
-              # Check if there's an existing comment by the same author
-              echo "Checking for existing comments by the same author..."
-              COMMENTS=$(gh pr view $PR_NUMBER --json comments --jq ".comments[].author.login")
-              
-              echo "Existing comments by authors:"
-              echo "$COMMENTS"
-
-              CURRENT_USER=$(gh api user | jq -r .login)
-              echo "Current GitHub user:"
-              echo "$CURRENT_USER"
-
-              if echo "$COMMENTS" | grep -q "$CURRENT_USER"; then
-                # Update the last comment
-                echo "Updating the last comment by the same author..."
-                gh pr comment $PR_NUMBER --edit-last --body "$MD_CONTENT"
-                echo "Comment updated."
-              else
-                # Create a new comment
-                echo "Creating a new comment..."
-                gh pr comment $PR_NUMBER --body "$MD_CONTENT"
-                echo "New comment created."
-              fi
-            else
-              echo "Markdown file not found."
-            fi
-
-
-
-
-
-      - name: Run Whitesource scan is Checked
-        if: steps.check-flags.outputs.flag_a == 'true'
-        run: echo "Running Whitesource scan"
+      - name: Run Utility Script with Whitesource Log
+        run: |
+          LOG_FILE="${{ steps.find-log-dir.outputs.log_dir }}whitesource.0.log"
+          /home/itadmin/mend-runner/actions-runner/_work/springboot-starterkit/springboot-starterkit/.github/utils/scripts/utility.sh "$LOG_FILE"    
+          
       
-      - name: List Docker images with 'latest' tag
-        id: list-images
-        run: |
-          IMAGES=$(docker images --format "{{.Repository}}:latest" | sort | uniq)
-          if [ -z "$IMAGES" ]; then
-            echo "No Docker images with 'latest' tag found."
-            exit 1
-          else
-            echo "Docker images with 'latest' tag found:"
-            echo "$IMAGES"
-          fi        
-
-      - name: Tag Docker images with "GHA"
-        run: |
-          IMAGES=$(docker images --format "{{.Repository}}:{{.Tag}}" | grep ':latest' | sort | uniq)       
-          for IMAGE in $IMAGES; do
-            echo "Inside for loop...IMAGE==="
-            echo $IMAGE
-            echo "docker tag $IMAGE ${IMAGE%:latest}:GHA"            
-            docker tag $IMAGE ${IMAGE%:latest}:GHA
-            docker rmi $IMAGE            
-          done
