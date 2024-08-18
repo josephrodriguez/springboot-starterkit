@@ -1,5 +1,5 @@
 FROM amazoncorretto:21.0.1 as build
-COPY . /usr/app
+COPY . /usr/app/
 WORKDIR /usr/app
 RUN chmod +x mvnw && ./mvnw clean package
 
