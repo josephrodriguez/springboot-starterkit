@@ -57,7 +57,7 @@ jobs:
       - name: Run Utility Script with Whitesource Log
         run: |
           LOG_FILE="${{ steps.find-log-dir.outputs.log_dir }}whitesource.0.log"
-          /home/itadmin/mend-runner/actions-runner/_work/springboot-starterkit/springboot-starterkit/.github/utils/scripts/utility.sh "$LOG_FILE"    
+          sh /home/itadmin/mend-runner/actions-runner/_work/springboot-starterkit/springboot-starterkit/.github/utils/scripts/utility.sh "$LOG_FILE"    
           
       - name: Publish whitesource report to PR page
         env:
