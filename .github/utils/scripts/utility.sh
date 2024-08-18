@@ -54,6 +54,7 @@ parseScanUrl() {
   done
 
   echo "End : Generate Markdown Report..."
+  cp $md_file /home/itadmin/ws_report
 
   echo "Markdown file with hyperlinks created: $md_file"
 }
