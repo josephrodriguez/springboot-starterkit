@@ -41,7 +41,7 @@ parseScanUrl() {
   # Extract and process the log lines from the start line
   tail -n +$start_line "$log_file" | grep -E 'Project name:|latest \(|URL:' | while IFS= read -r line; do
     container=$(echo "$line" | grep -oP '(?<=Project name: bigfix/)\S+')
-    checksum=$(echo "$line" | grep -oP '(?<=latest \()[0-9a-f]+')
+    checksum=$(echo "$line" | grep -oP '(?<=GHA \()[0-9a-f]+')
     url=$(echo "$line" | grep -oP '(?<=project URL:)\S+')
 
     echo "container................................$container"
