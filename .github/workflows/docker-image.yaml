@@ -4,7 +4,7 @@ on:
     branches:
       - '*'
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - '*'
   pull_request:
     branches:
       - '*'
@@ -15,6 +15,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
       - name: Docker metadata
         id: metadata
@@ -38,6 +44,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           context: .
+          platforms: linux/amd64,linux/arm64/v8
           push: ${{ startsWith(github.ref, 'refs/tags/') }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
