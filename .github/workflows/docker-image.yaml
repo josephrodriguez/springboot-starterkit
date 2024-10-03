@@ -1,8 +1,6 @@
 name: Docker image
 on:
   push:
-    branches:
-      - '*'
     tags:
       - '*'
   pull_request:
@@ -44,7 +42,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           context: .
-          platforms: linux/amd64,linux/arm64/v8
+          platforms: linux/amd64,linux/arm64
           push: ${{ startsWith(github, 'refs/tags/') }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
