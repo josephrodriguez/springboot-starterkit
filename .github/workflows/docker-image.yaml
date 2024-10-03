@@ -45,7 +45,7 @@ jobs:
           cache-to: type=gha,mode=max
           context: .
           platforms: linux/amd64,linux/arm64/v8
-          push: ${{ startsWith(github.ref, 'refs/tags/') }}
+          push: ${{ startsWith(github, 'refs/tags/') }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
 

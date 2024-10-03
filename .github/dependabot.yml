@@ -3,17 +3,17 @@ updates:
   - package-ecosystem: "maven"
     directory: "/"
     schedule:
-      interval: "weekly"
-    target-branch: "develop"
+      interval: "daily"
+    target-branch: "main"
       
   - package-ecosystem: "docker"
     directory: "/"
     schedule:
-      interval: "weekly"
-    target-branch: "develop"
+      interval: "daily"
+    target-branch: "main"
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
-    target-branch: "develop"
+      interval: "daily"
+    target-branch: "main"
