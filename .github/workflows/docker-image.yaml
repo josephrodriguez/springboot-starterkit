@@ -3,9 +3,6 @@ on:
   push:
     tags:
       - '*'
-  pull_request:
-    branches:
-      - '*'
 jobs:
   build:
     name: Build & push docker image
@@ -46,6 +43,8 @@ jobs:
           push: ${{ startsWith(github, 'refs/tags/') }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          provenance: mode=max
+          sbom: true
 
       - name: Create release
         uses: josephrodriguez/swift-release@v1.1
