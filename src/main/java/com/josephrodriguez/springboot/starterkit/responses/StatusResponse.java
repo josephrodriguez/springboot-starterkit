@@ -1,16 +1,22 @@
 package com.josephrodriguez.springboot.starterkit.responses;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class StatusResponse {
 
-    private String status;
-    private LocalDateTime datetime;
+    private final String status;
+    private final LocalDateTime datetime;
+
+    public StatusResponse(String status, LocalDateTime datetime) {
+        this.status = status;
+        this.datetime = datetime;
+    }
+
+    public LocalDateTime getDatetime() {
+        return datetime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }

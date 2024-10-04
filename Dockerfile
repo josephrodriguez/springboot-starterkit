@@ -1,9 +1,9 @@
-FROM amazoncorretto:23-alpine-jdk@sha256:6d2a7b42ea97c88639b02852f6459f81289a1d9875b6cd6698a2c272aa0d6c94 as build
+FROM azul/zulu-openjdk:23-jdk-crac@sha256:4b6c7146f80d4758a1d33823795086be718983932a0b9534dcdc8c813e0661c7 as build
 COPY . /usr/app
 WORKDIR /usr/app
 RUN chmod +x mvnw && ./mvnw clean package
 
-FROM amazoncorretto:23.0.0-alpine@sha256:6d2a7b42ea97c88639b02852f6459f81289a1d9875b6cd6698a2c272aa0d6c94
+FROM azul/zulu-openjdk:23-jre-headless@sha256:2bc348d73bce5ef0928e73413f1836d90614e8bb95e2b4ac108cb385f7f73c9d
 RUN mkdir /app
 COPY --from=build /usr/app/target/*.jar /app/com.springboot.starterkit.jar
 EXPOSE 8080
