@@ -1,11 +1,10 @@
-name: docker release
+name: docker-release
 on:
   push:
     tags:
       - '*'
 jobs:
   build:
-    name: Build & push docker image
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,7 +39,7 @@ jobs:
           cache-to: type=gha,mode=max
           context: .
           platforms: linux/amd64,linux/arm64
-          push: ${{ startsWith(github, 'refs/tags/') }}
+          push: ${{ github.ref_type == 'tag' }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           provenance: mode=max
@@ -48,7 +47,7 @@ jobs:
 
       - name: Create release
         uses: josephrodriguez/swift-release@v1.1
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
+        if: ${{ github.ref_type == 'tag' }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: ${{ contains(github.ref, 'alpha') || contains(github.ref, 'beta') || contains(github.ref, 'rc') }}          
