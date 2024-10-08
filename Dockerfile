@@ -1,9 +1,9 @@
-FROM azul/zulu-openjdk:23-jdk-crac@sha256:4b6c7146f80d4758a1d33823795086be718983932a0b9534dcdc8c813e0661c7 as build
+FROM azul/zulu-openjdk:23-jdk-crac@sha256:57695039a4614227840a7a24987eacec233447968c2c54c9e926751b850af04e as build
 COPY . /usr/app
 WORKDIR /usr/app
 RUN chmod +x mvnw && ./mvnw clean package
 
-FROM azul/zulu-openjdk:23-jre-headless@sha256:2bc348d73bce5ef0928e73413f1836d90614e8bb95e2b4ac108cb385f7f73c9d
+FROM azul/zulu-openjdk:23-jre-headless@sha256:897b96db593cf007b9638710734c00d8e692c032698091055734b6c3f78efb01
 RUN mkdir /app
 COPY --from=build /usr/app/target/*.jar /app/com.springboot.starterkit.jar
 EXPOSE 8080
