@@ -55,6 +55,7 @@ jobs:
       - name: Docker Scout
         uses: docker/scout-action@v1
         with:
+          organization: ${{ secrets.DOCKER_USERNAME }}
           command: cves,recommendations,compare
           to-latest: true
           ignore-base: true
