@@ -1,42 +1,27 @@
 name: gradle-build
-
 on:
   push:
     branches:
       - '*'
-    tags:
-      - '*'
   pull_request:
     branches:
       - '*'
-
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v4.2.2
-
-    - name: Set up JDK 21
-      uses: actions/setup-java@v4
-      with:
-        java-version: '21'
-        distribution: 'zulu'
-        cache: gradle
-
-    - name: Build
-      run: ./gradlew clean build --scan --warning-mode all
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v4
-      with:
-        directory: ./target/jacoco-report
-        flags: unittests
-        name: codecov-umbrella
-        verbose: true
+  gradle:
+    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@main
+    with:
+      cache_gradle: true
+      cache_sonar: true
+      java_version: '21'
+      java_distribution: 'temurin'
+      gradle_enable_scan: true
+      gradle_enable_sonar: true
+      gradle_log_level: info
+    secrets:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   dependabot:
-    needs: [build]
+    needs: [gradle]
     permissions: write-all
     runs-on: ubuntu-latest
     if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request'}}
