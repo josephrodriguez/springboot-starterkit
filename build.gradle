@@ -9,6 +9,7 @@ plugins {
     id 'maven-publish'
     id 'java'
     id 'org.springframework.boot' version '3.3.5'
+    id "org.sonarqube" version "5.1.0.4882"
 }
 
 repositories {
@@ -43,6 +44,14 @@ publishing {
         maven(MavenPublication) {
             from(components.java)
         }
+    }
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "josephrodriguez_springboot-starterkit"
+        property "sonar.organization", "josephrodriguez"
+        property "sonar.host.url", "https://sonarcloud.io"
     }
 }
 
