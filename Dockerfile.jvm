@@ -1,5 +1,5 @@
 # Use a specific version for reproducibility
-FROM azul/zulu-openjdk:23-jdk-crac AS build
+FROM eclipse-temurin:21-jdk-alpine@sha256:c63d8669d87e16bcee66c0379d1deedf844152da449ad48f2c8bd73a3705d36b AS build
 
 # Set working directory
 WORKDIR /usr/app
@@ -12,10 +12,10 @@ COPY settings.gradle settings.gradle
 COPY src src
 
 # Grant execution rights and build the application
-RUN chmod +x gradlew && ./gradlew build --no-daemon
+RUN chmod +x ./gradlew && ./gradlew build --no-daemon
 
-# Use a smaller JRE image for the runtime
-FROM azul/zulu-openjdk:23-jre-headless
+## Use a smaller JRE image for the runtime
+ FROM eclipse-temurin:21-jre-alpine@sha256:03c1fb6fff9b28aa3be69f59df0a274c2c3984189726645cb383217229b25082 AS runtime
 
 # Create the application directory
 RUN mkdir /app
