@@ -1,5 +1,5 @@
 # Use a specific version for reproducibility
-FROM azul/zulu-openjdk:21-jdk-crac AS build
+FROM azul/zulu-openjdk:23-jdk-crac AS build
 
 # Set working directory
 WORKDIR /usr/app
@@ -15,7 +15,7 @@ COPY src src
 RUN chmod +x gradlew && ./gradlew build --no-daemon
 
 # Use a smaller JRE image for the runtime
-FROM azul/zulu-openjdk:21-jre-headless
+FROM azul/zulu-openjdk:23-jre-headless
 
 # Create the application directory
 RUN mkdir /app
