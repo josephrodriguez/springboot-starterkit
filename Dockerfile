@@ -1,11 +1,30 @@
-FROM azul/zulu-openjdk:23-jdk-crac@sha256:09ddf8f882931f0050710815c840e2a310f025df1a3aa7f7b52a0394b4a01060 as build
-COPY . /usr/app
-WORKDIR /usr/app
-RUN chmod +x mvnw && ./mvnw clean package
+# Use a specific version for reproducibility
+FROM azul/zulu-openjdk:21-jdk-crac AS build
 
-FROM azul/zulu-openjdk:23-jre-headless@sha256:a72fdb505fbf87f84532e4fb13ab5738504d2ee014d41af21091fcbe9cd63f98
+# Set working directory
+WORKDIR /usr/app
+
+# Copy only the necessary files for dependency resolution
+COPY gradlew gradlew
+COPY gradle gradle
+COPY build.gradle build.gradle
+COPY settings.gradle settings.gradle
+COPY src src
+
+# Grant execution rights and build the application
+RUN chmod +x gradlew && ./gradlew build --no-daemon
+
+# Use a smaller JRE image for the runtime
+FROM azul/zulu-openjdk:21-jre-headless
+
+# Create the application directory
 RUN mkdir /app
-COPY --from=build /usr/app/target/*.jar /app/com.springboot.starterkit.jar
+
+# Copy the JAR from the build stage
+COPY --from=build /usr/app/build/libs/*.jar /app/app.jar
+
+# Expose the application's port
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/com.springboot.starterkit.jar"]
+# Define the command to run the application
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
