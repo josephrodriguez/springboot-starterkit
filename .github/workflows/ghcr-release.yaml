@@ -13,7 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [graalvm, jvm]
+        version:
+          - graalvm
+          - jvm
+        platform:
+          - linux/amd64
+          - linux/arm64
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
@@ -45,9 +50,9 @@ jobs:
           cache-to: type=gha,mode=max
           context: .
           file: Dockerfile.${{ matrix.version }}
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platform }}
           labels: ${{ steps.metadata.outputs.labels }}
           tags: ${{ steps.metadata.outputs.tags }}
           provenance: mode=max
-          push: true
+#          push: true
           sbom: true
