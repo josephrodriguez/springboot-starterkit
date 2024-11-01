@@ -18,7 +18,7 @@ jobs:
           - jvm
         platform:
           - linux/amd64
-          # - linux/arm64
+          - linux/arm64
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
@@ -133,6 +133,6 @@ jobs:
 
           docker buildx imagetools create $tags $digests
 
-      - name: Inspect image
-        run: |
-          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE_NAME }}:${{ steps.metadata.outputs.tags }}
+      # - name: Inspect image
+      #   run: |
+      #     docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE_NAME }}:${{ steps.metadata.outputs.tags }}

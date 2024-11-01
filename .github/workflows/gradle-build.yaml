@@ -32,6 +32,22 @@ jobs:
         name: codecov-umbrella
         verbose: true
 
+
+    - name: Generate Summary
+      run: |
+        # Extract the Build Scan URL from the logs
+        scan_url=$(grep -o 'https://gradle.com/s/[^ ]*' <<< "$GITHUB_RUN_LOG" | tail -1)
+
+        # Check if the scan URL was found
+        if [ -z "$scan_url" ]; then
+          echo "No Gradle Build Scan URL found."
+          exit 1
+        fi
+
+        # Write the URL to the GitHub Actions summary
+        echo "## Gradle Build Scan" >> $GITHUB_STEP_SUMMARY
+        echo "The [Gradle Build Scan]($scan_url) is available for this build." >> $GITHUB_STEP_SUMMARY        
+
   dependabot:
     needs: [build]
     permissions: write-all
