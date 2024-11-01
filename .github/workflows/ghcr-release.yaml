@@ -29,10 +29,10 @@ jobs:
           platform=${{ matrix.platform }}
           echo "platform=${platform//\//-}" >> $GITHUB_OUTPUT          
 
-      - name: Set up QEMU
+      - name: Set up Qemu
         uses: docker/setup-qemu-action@v3
 
-      - name: Set up Docker Buildx
+      - name: Set up Docker buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Docker metadata
@@ -131,7 +131,8 @@ jobs:
 
           tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON")
 
-          echo $tags
-          echo $digests
-
           docker buildx imagetools create $tags $digests
+
+      - name: Inspect image
+        run: |
+          docker buildx imagetools inspect ${{ env.REGISTRY_IMAGE_NAME }}:${{ steps.metadata.outputs.tags }}
