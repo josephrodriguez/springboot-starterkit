@@ -88,7 +88,7 @@ jobs:
     strategy:
       matrix:
         version:
-          # - graalvm
+          - graalvm
           - jvm
     permissions:
       packages: write
@@ -128,18 +128,12 @@ jobs:
           for digest_file in "${{ matrix.version }}"-*; do
             digest=$(cat "$digest_file")
             digests="$digests ${{ env.REGISTRY_IMAGE_NAME }}@${digest}"
-
-            echo $digest_file
-            echo $digest
           done
 
-          echo $digests
+          tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON"
 
-          echo "$DOCKER_METADATA_OUTPUT_JSON" | jq
-          # Extract tags from $DOCKER_METADATA_OUTPUT_JSON
-          # tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON"
-          
-          # echo "$tags"
+          echo "$digests"
+          echo "$tags"
 
           # Use the tags in the manifest list creation
           # docker buildx imagetools create $tags $digests
