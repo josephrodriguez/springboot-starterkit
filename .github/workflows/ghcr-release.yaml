@@ -83,7 +83,7 @@ jobs:
 #          subject-digest: ${{ steps.push.outputs.digest }}
 #          push-to-registry: true
 
-  push:
+  manifest:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -130,7 +130,7 @@ jobs:
             digests="$digests ${{ env.REGISTRY_IMAGE_NAME }}@${digest}"
           done
 
-          tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON")
+          tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") $(printf '${{ env.REGISTRY_IMAGE_NAME }}@sha256:%s ' *)
 
           echo "$digests"
           echo "$tags"
