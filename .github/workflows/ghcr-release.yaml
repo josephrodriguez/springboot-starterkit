@@ -23,6 +23,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4.2.2
 
+      - name: Setup variables
+        id: setup
+        run: |
+          platform=${{ matrix.platform }}
+          echo "platform=${platform//\//-}" >> $GITHUB_OUTPUT          
+
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -45,6 +51,7 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
+        id: build
         with:
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -53,17 +60,16 @@ jobs:
           platforms: ${{ matrix.platform }}
           outputs: type=image,name=${{ env.REGISTRY_IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true
           labels: ${{ steps.metadata.outputs.labels }}
-#          tags: ${{ steps.metadata.outputs.tags }}
-#          provenance: mode=max
-#          push: true
-#         sbom: true
 
       - name: Export digest
         run: |
           mkdir -p /tmp/digests/
           digest="${{ steps.build.outputs.digest }}"
+
+          echo "${digest}"
+          echo "${digest#sha256:}" 
+
           echo "${digest#sha256:}" > "/tmp/digests/${{ matrix.version }}-${{ steps.setup.outputs.platform }}"
-#          touch "/tmp/digests/${{ matrix.version }}/${digest#sha256:}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
