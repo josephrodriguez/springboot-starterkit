@@ -65,7 +65,7 @@ jobs:
         run: |
           mkdir -p /tmp/digests/
           digest="${{ steps.build.outputs.digest }}"
-          echo "${digest#sha256:}" > "/tmp/digests/${{ matrix.version }}-${{ steps.setup.outputs.platform }}"
+          echo "${digest}" > "/tmp/digests/${{ matrix.version }}-${{ steps.setup.outputs.platform }}"
 
       - name: Upload digest
         uses: actions/upload-artifact@v4
