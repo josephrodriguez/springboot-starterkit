@@ -123,17 +123,21 @@ jobs:
       - name: Create manifest list & push
         working-directory: /tmp/digests
         run: |
+          ls -lsah
           digests=""
           for digest_file in "${{ matrix.version }}"-*; do
             digest=$(cat "$digest_file")
-            digests="$digests ${{ env.REGISTRY_IMAGE_NAME }}@${digest}"
+            # digests="$digests ${{ env.REGISTRY_IMAGE_NAME }}@${digest}"
 
-            echo "$digest_file"
-            echo "$digests"
+            echo $digest_file
+            echo $digest
           done
 
           echo "$DOCKER_METADATA_OUTPUT_JSON"
           # Extract tags from $DOCKER_METADATA_OUTPUT_JSON
-          tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON"
+          # tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON"
           
-          echo "$tags"
+          # echo "$tags"
+
+          # Use the tags in the manifest list creation
+          # docker buildx imagetools create $tags $digests
