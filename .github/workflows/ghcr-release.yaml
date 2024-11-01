@@ -129,6 +129,9 @@ jobs:
             digests="$digests ${{ env.REGISTRY_IMAGE_NAME }}@${digest}"
           done
 
-          tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") $(printf '${{ env.REGISTRY_IMAGE_NAME }}@sha256:%s ' *)
+          tags=$(jq -r '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON")
+
+          echo $tags
+          echo $digests
 
           docker buildx imagetools create $tags $digests
