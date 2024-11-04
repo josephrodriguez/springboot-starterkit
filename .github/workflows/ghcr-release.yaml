@@ -15,7 +15,7 @@ jobs:
     with:
       github_repository: ${{ github.repository }}
       docker_context: "."
-      docker_platform: ${{ matrix.platform }}
+      # docker_platform: ${{ matrix.platform }}
       docker_push_enabled: false
       docker_file_name: "./Dockerfile"
       os_version: "ubuntu-latest"
