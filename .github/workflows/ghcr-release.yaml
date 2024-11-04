@@ -8,9 +8,9 @@ on:
       - '*'
 jobs:
   DeployToPlatforms:
-    strategy:
-      matrix:
-        platform: ["linux/amd64", "linux/arm64"]
+    # strategy:
+    #   matrix:
+    #     platform: ["linux/amd64", "linux/arm64"]
     uses: josephrodriguez/github-workflow/.github/workflows/java-docker-relase.yaml@main
     with:
       github_repository: ${{ github.repository }}
