@@ -7,19 +7,18 @@ on:
     branches:
       - '*'
 jobs:
-  ReuseableMatrixJobForDeployment:
+  DeployToPlatforms:
     strategy:
       matrix:
-        include:
-          - platform: "linux/amd64"
-            os_version: "ubuntu-latest"
-          - platform: "linux/arm64"
-            os_version: "ubuntu-latest"
+        platform: ["linux/amd64", "linux/arm64"]
     uses: josephrodriguez/github-workflow/.github/workflows/java-docker-relase.yaml@main
     with:
-      os_version: "ubuntu-latest"
       github_repository: ${{ github.repository }}
+      docker_context: "."
       docker_platform: ${{ matrix.platform }}
+      docker_push_enabled: false
+      docker_file_name: "./Dockerfile"
+      os_version: "ubuntu-latest"
     secrets:
       DOCKER_REGISTRY_URL: ghcr.io
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
