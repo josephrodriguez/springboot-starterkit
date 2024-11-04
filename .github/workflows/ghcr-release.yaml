@@ -10,12 +10,12 @@ jobs:
   ReuseableMatrixJobForDeployment:
     strategy:
       matrix:
-        target: [dev, stage, prod]
+        platform: ["linux/arm64", "linux/arm64"]
     uses: josephrodriguez/github-workflow/.github/workflows/java-docker-relase.yaml@main
     with:
       os_version: "ubuntu-latest"
       github_repository: ${{ github.repository }}
-      docker_platform: ${{ matrix.target }}
+      docker_platform: ${{ matrix.platform }}
     secrets:
       DOCKER_REGISTRY_URL: ghcr.io
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
