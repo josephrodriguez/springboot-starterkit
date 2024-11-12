@@ -1,5 +1,5 @@
 # Use a specific version for reproducibility
-FROM eclipse-temurin:21-jdk-alpine@sha256:c63d8669d87e16bcee66c0379d1deedf844152da449ad48f2c8bd73a3705d36b AS build
+FROM eclipse-temurin:21-jdk-alpine@sha256:4909fb9ab52e3ce1488cc6e6063da71a0f9f9833420cc254fe03bbe25daec9e0 AS build
 
 # Set working directory
 WORKDIR /usr/app
