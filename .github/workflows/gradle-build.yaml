@@ -2,7 +2,8 @@ name: gradle-build
 on:
   push:
     branches:
-      - '*'
+      - 'feature/*'
+      - 'fix/*'
   pull_request:
     branches:
       - '*'
@@ -22,6 +23,7 @@ jobs:
 
   dependabot:
     needs: [gradle]
+    permissions: write-all
     uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@main
     secrets:
       AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      

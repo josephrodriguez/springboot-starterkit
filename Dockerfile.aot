@@ -1,5 +1,5 @@
 # Stage 1: Build the native executable
-FROM ghcr.io/graalvm/graalvm-community:23.0.1 AS build
+FROM ghcr.io/graalvm/graalvm-community:23.0.1@sha256:eb8f7140c1acf1f06a93e6e60e2bd8efe599e7f7a0fecbdcb79ee8bab0033572 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY src src
 RUN ./gradlew nativeCompile --no-daemon --info
 
 # Runtime image for the native binary
-FROM debian:bookworm-slim AS runtime
+FROM debian:bookworm-slim@sha256:d365f4920711a9074c4bcd178e8f457ee59250426441ab2a5f8106ed8fe948eb AS runtime
 WORKDIR /app
 COPY --from=build /app/build/native/nativeCompile/springboot-starterkit /app/app
 RUN chmod +x /app/app
