@@ -13,7 +13,7 @@ jobs:
       matrix:
         version:
           - jvm
-          - native        
+          - aot
         platform:
           - linux/amd64
           - linux/arm64
@@ -35,7 +35,7 @@ jobs:
       matrix:
         version:
           - jvm
-          - native
+          - aot
     uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@main  
     permissions:
       packages: write

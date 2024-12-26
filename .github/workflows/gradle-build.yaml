@@ -2,7 +2,9 @@ name: gradle-build
 on:
   push:
     branches:
-      - '*'
+      - 'feature/*'
+      - 'fix/*'
+      - 'bump/*'
   pull_request:
     branches:
       - '*'
@@ -12,7 +14,7 @@ jobs:
     with:
       cache_gradle: true
       cache_sonar: true
-      java_version: '21'
+      java_version: '23'
       java_distribution: 'temurin'
       gradle_enable_scan: true
       gradle_enable_sonar: true
@@ -22,6 +24,7 @@ jobs:
 
   dependabot:
     needs: [gradle]
+    permissions: write-all
     uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@main
     secrets:
       AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
