@@ -4,6 +4,7 @@ on:
     branches:
       - 'feature/*'
       - 'fix/*'
+      - 'bump/*'
   pull_request:
     branches:
       - '*'
