@@ -8,7 +8,7 @@ org-springframework-boot-spring-boot-starter-actuator = "3.4.2"
 org-springframework-boot-spring-boot-starter-test = "3.4.2"
 org-springframework-boot-spring-boot-starter-web = "3.4.2"
 org-springframework-boot-spring-boot-starter-web-services = "3.4.2"
-org-yaml-snakeyaml = "2.3"
+org-yaml-snakeyaml = "2.4"
 
 [libraries]
 org-projectlombok-lombok = { module = "org.projectlombok:lombok", version.ref = "org-projectlombok-lombok" }
