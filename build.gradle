@@ -6,7 +6,7 @@
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.4.4'
+    id 'org.springframework.boot' version '3.4.5'
     id "org.sonarqube" version "6.1.0.5360"
     id 'org.graalvm.buildtools.native' version '0.10.6'
 }
