@@ -5,7 +5,7 @@
 org-projectlombok-lombok = "1.18.38"
 org-springdoc-springdoc-openapi-starter-webmvc-ui = "2.8.8"
 org-springframework-boot-spring-boot-starter-actuator = "3.4.5"
-org-springframework-boot-spring-boot-starter-test = "3.4.5"
+org-springframework-boot-spring-boot-starter-test = "3.5.0"
 org-springframework-boot-spring-boot-starter-web = "3.4.5"
 org-springframework-boot-spring-boot-starter-web-services = "3.4.5"
 org-yaml-snakeyaml = "2.4"
