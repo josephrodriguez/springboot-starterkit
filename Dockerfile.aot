@@ -1,5 +1,5 @@
 # Stage 1: Build the native executable
-FROM ghcr.io/graalvm/graalvm-community:25.0.0@sha256:024304979c5d2dea8d88ef537e70ce82314720c97262da9b2bd276ae1db80f67 AS build
+FROM ghcr.io/graalvm/graalvm-community:25.0.1@sha256:30bb7c24b18a4f1af194d3858847b16e97ab616ef40f19d552f116a834874aeb AS build
 
 # Set the working directory
 WORKDIR /app
