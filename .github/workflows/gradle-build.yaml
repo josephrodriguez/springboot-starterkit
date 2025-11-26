@@ -6,15 +6,14 @@ on:
       - 'fix/*'
       - 'bump/*'
   pull_request:
-    branches:
-      - '*'
+    types: [opened, synchronize, reopened]
 jobs:
   gradle:
-    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@main
+    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@7b5e97ad78ba7232ccfb92d8b50c1ee02517bdbc
     with:
       cache_gradle: true
       cache_sonar: true
-      java_version: '23'
+      java_version: '25'
       java_distribution: 'temurin'
       gradle_enable_scan: true
       gradle_enable_sonar: true
@@ -25,6 +24,6 @@ jobs:
   dependabot:
     needs: [gradle]
     permissions: write-all
-    uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@main
+    uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@7b5e97ad78ba7232ccfb92d8b50c1ee02517bdbc
     secrets:
       AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      

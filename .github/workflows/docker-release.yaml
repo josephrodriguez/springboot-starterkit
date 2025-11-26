@@ -11,7 +11,7 @@ jobs:
         platform:
           - linux/amd64
           - linux/arm64
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@main
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@7b5e97ad78ba7232ccfb92d8b50c1ee02517bdbc
     with:
       github_repository: ${{ github.repository }}
       docker_digest_name: digests
@@ -24,7 +24,7 @@ jobs:
       DOCKER_REGISTRY_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.DOCKER_PASSWORD }}
   push:
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@main  
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@7b5e97ad78ba7232ccfb92d8b50c1ee02517bdbc
     needs:
       - docker
     with:

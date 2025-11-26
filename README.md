@@ -1,13 +1,13 @@
 # SpringBoot StarterKit
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/josephrodriguez/springboot-starterkit/maven-package.yaml?branch=main)
+![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/josephrodriguez/springboot-starterkit/gradle-build.yaml?branch=main)
 [![codecov](https://codecov.io/gh/josephrodriguez/springboot-starterkit/branch/main/graph/badge.svg?token=FVTMMF2BB1)](https://codecov.io/gh/josephrodriguez/springboot-starterkit)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=josephrodriguez_springboot-starterkit&metric=alert_status)](https://sonarcloud.io/dashboard?id=josephrodriguez_springboot-starterkit)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=josephrodriguez_springboot-starterkit&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=josephrodriguez_springboot-starterkit)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=josephrodriguez_springboot-starterkit&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=josephrodriguez_springboot-starterkit)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=josephrodriguez_springboot-starterkit&metric=security_rating)](https://sonarcloud.io/dashboard?id=josephrodriguez_springboot-starterkit)
 ---
-![[java 21]](https://img.shields.io/badge/java-21-blue.svg)
+![[java 25]](https://img.shields.io/badge/java-25-blue.svg)
 ![[SpringBoot]](https://img.shields.io/badge/springboot-v3.3.5-brightgreen.svg)
 ![release](https://img.shields.io/badge/release-1.3.0-blue)
 [![docker](https://img.shields.io/docker/pulls/josephrodriguez/springboot-starterkit.svg)](https://hub.docker.com/repository/docker/josephrodriguez/springboot-starterkit)
