@@ -6,8 +6,7 @@ on:
       - 'fix/*'
       - 'bump/*'
   pull_request:
-    branches:
-      - '*'
+    types: [opened, synchronize, reopened]
 jobs:
   gradle:
     uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@main
