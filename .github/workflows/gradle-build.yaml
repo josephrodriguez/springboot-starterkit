@@ -13,11 +13,11 @@ jobs:
     uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@main
     with:
       cache_gradle: true
-      cache_sonar: true
+      cache_sonar: false
       java_version: '25'
       java_distribution: 'temurin'
       gradle_enable_scan: true
-      gradle_enable_sonar: true
+      gradle_enable_sonar: false
       gradle_log_level: info
     secrets:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
