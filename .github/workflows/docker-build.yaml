@@ -1,0 +1,26 @@
+name: docker-build
+on:
+  push:
+    branches:
+      - 'feature/*'
+      - 'release/*'
+      - 'fix/*'
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  docker:
+    strategy:
+      fail-fast: true
+      matrix:
+        platform:
+          - linux/amd64
+          - linux/arm64
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@c2231ede51b8f4acf508632a6d0efcf07f6938c6
+    with:
+      github_repository: ${{ github.repository }}
+      docker_image_name: ${{ github.repository }}
+      docker_platform: ${{ matrix.platform }}
+      docker_registry_url: docker.io
+    secrets:
+      DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
+      DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
