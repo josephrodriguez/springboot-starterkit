@@ -3,8 +3,8 @@ on:
   push:
     branches:
       - 'feature/*'
+      - 'release/*'
       - 'fix/*'
-      - 'bump/*'
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
