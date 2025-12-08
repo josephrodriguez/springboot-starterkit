@@ -33,7 +33,7 @@ jobs:
         version:
           - jvm
           - aot
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@7b5e97ad78ba7232ccfb92d8b50c1ee02517bdbc
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@7056cf1ec83b1b5e4a0ca9c7e19da89d1c882c08
     permissions:
       packages: write
       contents: read
