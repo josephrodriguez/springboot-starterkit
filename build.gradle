@@ -6,7 +6,7 @@
 
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '4.0.0'
+    id 'org.springframework.boot' version '4.0.1'
     id "org.sonarqube" version "7.1.0.6387"
     id 'org.graalvm.buildtools.native' version '0.11.3'
 }
@@ -22,6 +22,7 @@ dependencies {
     implementation libs.org.springframework.boot.spring.boot.starter.web
     implementation libs.org.springframework.boot.spring.boot.starter.web.services
     implementation libs.org.springframework.boot.spring.boot.starter.actuator
+    implementation libs.org.springframework.boot.spring.boot.starter.thymeleaf
     implementation libs.org.springdoc.springdoc.openapi.starter.webmvc.ui
     implementation libs.org.projectlombok.lombok
     implementation libs.org.yaml.snakeyaml

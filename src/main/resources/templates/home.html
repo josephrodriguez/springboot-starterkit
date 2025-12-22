@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot StarterKit</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        :root {
+            --spring-green: #6DB33F;
+            --spring-green-dark: #4f8f2f;
+            --background: #f6fbf4;
+            --text-primary: #1f2937;
+            --text-muted: #4b5563;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            margin: 0;
+            background-color: var(--background);
+            color: var(--text-primary);
+        }
+
+        /* Shared width container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        header {
+            background-color: var(--spring-green);
+            color: white;
+        }
+
+        header .container {
+            padding: 1.5rem 1.5rem; /* reduced height */
+        }
+
+        header h1 {
+            margin: 0 0 0.25rem 0;
+        }
+
+        header p {
+            margin: 0;
+            font-size: 1rem;
+            opacity: 0.95;
+        }
+
+        main {
+            margin: 2.5rem auto;
+        }
+
+        h2 {
+            color: var(--spring-green-dark);
+            margin-bottom: 1rem;
+        }
+
+        p {
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .features {
+            margin-top: 2.5rem;
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            border-left: 6px solid var(--spring-green);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        a {
+            color: var(--spring-green);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--spring-green-dark);
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <h1>Spring Boot StarterKit</h1>
+        <p>Exploring Java & Spring Boot capabilities</p>
+    </div>
+</header>
+
+<main class="container">
+    <section>
+        <p>
+            This project demonstrates core features of <strong>Java</strong> and
+            <strong>Spring Boot</strong> framework.
+        </p>
+    </section>
+
+    <section class="features">
+        <h2>Available Features</h2>
+
+        <div class="feature-card">
+            <h3>📘 API Documentation</h3>
+            <p>
+                Browse and interact with the REST API endpoints using Swagger / OpenAPI.
+            </p>
+            <p>
+                <a th:href="@{/swagger-ui/index.html}" target="_blank">
+                    Open Swagger UI →
+                </a>
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>
+        © <span th:text="${#dates.year(#dates.createNow())}"></span>
+        Spring Boot Demo Project
+    </p>
+</footer>
+
+</body>
+</html>
