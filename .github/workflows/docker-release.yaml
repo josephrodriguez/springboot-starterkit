@@ -11,14 +11,17 @@ jobs:
         version:
           - jvm
           - aot
-        platform:
-          - linux/amd64
-          - linux/arm64
+        build:
+          - runner: ubuntu-24.04-arm
+            platform: linux/arm64
+          - runner: ubuntu-latest
+            platform: linux/amd64
     uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
     with:
+      github_runner: ${{ matrix.build.runner }}
       docker_image_name: ghcr.io/${{ github.repository }}
       docker_file: "./Dockerfile.${{ matrix.version }}"
-      docker_platform: ${{ matrix.platform }}
+      docker_platform: ${{ matrix.build.platform }}
       docker_push: true
       docker_digest_name: digests-${{ matrix.version }}
       docker_registry_url: ghcr.io
