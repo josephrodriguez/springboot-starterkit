@@ -16,11 +16,11 @@ jobs:
           - linux/arm64
     uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
     with:
-      docker_digest_name: digests-${{ matrix.version }}
-      docker_push_enabled: true
-      docker_file_name: "./Dockerfile.${{ matrix.version }}"
       docker_image_name: ghcr.io/${{ github.repository }}
+      docker_file: "./Dockerfile.${{ matrix.version }}"
       docker_platform: ${{ matrix.platform }}
+      docker_push: true
+      docker_digest_name: digests-${{ matrix.version }}
       docker_registry_url: ghcr.io
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
