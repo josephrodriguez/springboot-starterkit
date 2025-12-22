@@ -4,10 +4,11 @@
 [versions]
 org-projectlombok-lombok = "1.18.42"
 org-springdoc-springdoc-openapi-starter-webmvc-ui = "3.0.0"
-org-springframework-boot-spring-boot-starter-actuator = "4.0.0"
-org-springframework-boot-spring-boot-starter-test = "4.0.0"
-org-springframework-boot-spring-boot-starter-web = "4.0.0"
-org-springframework-boot-spring-boot-starter-web-services = "4.0.0"
+org-springframework-boot-spring-boot-starter-actuator = "4.0.1"
+org-springframework-boot-spring-boot-starter-test = "4.0.1"
+org-springframework-boot-spring-boot-starter-web = "4.0.1"
+org-springframework-boot-spring-boot-starter-web-services = "4.0.1"
+org-springframework-boot-spring-boot-starter-thymeleaf = "4.0.1"
 org-yaml-snakeyaml = "2.5"
 
 [libraries]
@@ -17,4 +18,5 @@ org-springframework-boot-spring-boot-starter-actuator = { module = "org.springfr
 org-springframework-boot-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test", version.ref = "org-springframework-boot-spring-boot-starter-test" }
 org-springframework-boot-spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "org-springframework-boot-spring-boot-starter-web" }
 org-springframework-boot-spring-boot-starter-web-services = { module = "org.springframework.boot:spring-boot-starter-web-services", version.ref = "org-springframework-boot-spring-boot-starter-web-services" }
+org-springframework-boot-spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf", version.ref = "org-springframework-boot-spring-boot-starter-thymeleaf"}
 org-yaml-snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "org-yaml-snakeyaml" }
