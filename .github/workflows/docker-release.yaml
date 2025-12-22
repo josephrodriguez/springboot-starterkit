@@ -8,9 +8,6 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        version:
-          - jvm
-          - aot
         build:
           - runner: ubuntu-24.04-arm
             platform: linux/arm64
@@ -20,21 +17,14 @@ jobs:
     with:
       github_runner: ${{ matrix.build.runner }}
       docker_image_name: ghcr.io/${{ github.repository }}
-      docker_file: "./Dockerfile.${{ matrix.version }}"
       docker_platform: ${{ matrix.build.platform }}
       docker_push: true
-      docker_digest_name: digests-${{ matrix.version }}
+      docker_digest_name: digests-jvm
       docker_registry_url: ghcr.io
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   push:
-    strategy:
-      fail-fast: true
-      matrix:
-        version:
-          - jvm
-          - aot
     uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@7056cf1ec83b1b5e4a0ca9c7e19da89d1c882c08
     permissions:
       packages: write
@@ -45,11 +35,11 @@ jobs:
       docker_registry_url: ghcr.io
       docker_image_name: ghcr.io/${{ github.repository }}
       docker_image_tags: |
-        type=raw,value=${{ matrix.version }}-{{date 'YYYYMMDDhhmm'}}-{{sha}}
+        type=raw,value={{date 'YYYYMMDDhhmm'}}-{{sha}}
         type=semver,pattern={{version}}
         type=semver,pattern={{major}}.{{minor}}
         type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-      docker_digest_pattern: digests-${{ matrix.version }}-*
+      docker_digest_pattern: digests-jvm-*
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
