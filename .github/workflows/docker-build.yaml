@@ -10,7 +10,7 @@ jobs:
         platform:
           - linux/amd64
           - linux/arm64
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@7056cf1ec83b1b5e4a0ca9c7e19da89d1c882c08
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
     with:
       docker_image_name: ${{ github.repository }}
       docker_platform: ${{ matrix.platform }}
