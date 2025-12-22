@@ -12,7 +12,6 @@ jobs:
           - linux/arm64
     uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@7056cf1ec83b1b5e4a0ca9c7e19da89d1c882c08
     with:
-      github_repository: ${{ github.repository }}
       docker_image_name: ${{ github.repository }}
       docker_platform: ${{ matrix.platform }}
       docker_registry_url: ghcr.io

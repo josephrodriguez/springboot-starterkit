@@ -16,7 +16,6 @@ jobs:
           - linux/arm64
     uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
     with:
-      github_repository: ${{ github.repository }}
       docker_digest_name: digests-${{ matrix.version }}
       docker_push_enabled: true
       docker_file_name: "./Dockerfile.${{ matrix.version }}"
