@@ -24,6 +24,6 @@ jobs:
   dependabot:
     needs: [gradle]
     permissions: write-all
-    uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@7b5e97ad78ba7232ccfb92d8b50c1ee02517bdbc
+    uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
     secrets:
       AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      
