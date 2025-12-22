@@ -42,7 +42,11 @@ jobs:
     with:
       docker_registry_url: ghcr.io
       docker_image_name: ghcr.io/${{ github.repository }}
-      docker_image_tags: type=raw,value=${{ matrix.version }}-{{date 'YYYYMMDDhhmm'}}-{{sha}}
+      docker_image_tags: |
+        type=raw,value=${{ matrix.version }}-{{date 'YYYYMMDDhhmm'}}-{{sha}}
+        type=semver,pattern={{version}}
+        type=semver,pattern={{major}}.{{minor}}
+        type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
       docker_digest_pattern: digests-${{ matrix.version }}-*
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
