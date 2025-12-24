@@ -7,13 +7,16 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
+        build:
+          - platform: linux/amd64
+            runner: ubuntu-lastest
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
     uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
     with:
+      github_runner: ${{ matrix.build.runner }}
       docker_image_name: ${{ github.repository }}
-      docker_platform: ${{ matrix.platform }}
+      docker_platform: ${{ matrix.build.platform }}
       docker_registry_url: ghcr.io
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
