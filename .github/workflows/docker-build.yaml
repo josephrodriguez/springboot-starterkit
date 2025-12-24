@@ -9,7 +9,7 @@ jobs:
       matrix:
         build:
           - platform: linux/amd64
-            runner: ubuntu-lastest
+            runner: ubuntu-latest
           - platform: linux/arm64
             runner: ubuntu-24.04-arm
     uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
