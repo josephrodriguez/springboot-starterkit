@@ -12,7 +12,7 @@ jobs:
             runner: ubuntu-latest
           - platform: linux/arm64
             runner: ubuntu-24.04-arm
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@bbd328bf4d207e713429f96fd1bd425e1678436f
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@38b40873a2f3d9c67b050f74dc676dca8a0962b9
     with:
       github_runner: ${{ matrix.build.runner }}
       docker_image_name: ${{ github.repository }}
