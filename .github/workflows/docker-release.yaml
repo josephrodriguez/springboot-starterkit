@@ -19,7 +19,7 @@ jobs:
       docker_image_name: ghcr.io/${{ github.repository }}
       docker_platform: ${{ matrix.build.platform }}
       docker_push: true
-      docker_digest_name: digests-jvm
+      docker_digest_name: digests-spring-boot
       docker_registry_url: ghcr.io
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
@@ -39,7 +39,7 @@ jobs:
         type=semver,pattern={{version}}
         type=semver,pattern={{major}}.{{minor}}
         type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-      docker_digest_pattern: digests-jvm-*
+      docker_digest_pattern: digests-spring-boot*
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
