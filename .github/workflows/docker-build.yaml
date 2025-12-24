@@ -18,6 +18,8 @@ jobs:
       docker_image_name: ${{ github.repository }}
       docker_platform: ${{ matrix.build.platform }}
       docker_registry_url: ghcr.io
+      trivy_enabled: true
+      trivy_image_reference: ${{ github.repository }}
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
