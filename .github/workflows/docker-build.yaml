@@ -12,12 +12,14 @@ jobs:
             runner: ubuntu-latest
           - platform: linux/arm64
             runner: ubuntu-24.04-arm
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@bbd328bf4d207e713429f96fd1bd425e1678436f
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@66fe29258cfcf7c00a1a75b9e75f1a42b888892d
     with:
       github_runner: ${{ matrix.build.runner }}
       docker_image_name: ${{ github.repository }}
       docker_platform: ${{ matrix.build.platform }}
       docker_registry_url: ghcr.io
+      trivy_enabled: true
+      trivy_image_reference: ${{ github.repository }}
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}

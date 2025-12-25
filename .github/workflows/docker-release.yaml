@@ -19,13 +19,13 @@ jobs:
       docker_image_name: ghcr.io/${{ github.repository }}
       docker_platform: ${{ matrix.build.platform }}
       docker_push: true
-      docker_digest_name: digests-jvm
+      docker_digest_name: digests-spring-boot
       docker_registry_url: ghcr.io
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   push:
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@cba70701fc9ea301abe63cb0a30cb81cb3c7c8eb
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@1.5
     permissions:
       packages: write
       contents: read
@@ -39,7 +39,7 @@ jobs:
         type=semver,pattern={{version}}
         type=semver,pattern={{major}}.{{minor}}
         type=raw,value=latest,enable=${{ github.ref == format('refs/heads/{0}', 'main') }}
-      docker_digest_pattern: digests-jvm-*
+      docker_digest_pattern: digests-spring-boot*
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
