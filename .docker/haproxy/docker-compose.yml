@@ -1,0 +1,48 @@
+services:
+  app:
+    image: ghcr.io/josephrodriguez/springboot-starterkit:1.4.1
+    expose:
+      - "8080"
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      retries: 3
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+    mem_limit: 512m
+    cpus: "0.50"
+    networks:
+      - web-net
+
+  lb:
+    image: haproxy:3.3.1-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    depends_on:
+      - app
+    restart: unless-stopped
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: 128M
+
+    mem_limit: 128m
+    cpus: "0.20"
+
+    networks:
+      - web-net
+
+networks:
+  web-net:
+    driver: bridge
