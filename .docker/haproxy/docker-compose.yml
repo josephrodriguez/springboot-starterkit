@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
 
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
       interval: 10s
       retries: 3
 
@@ -19,7 +19,7 @@ services:
     mem_limit: 512m
     cpus: "0.50"
     networks:
-      - web-net
+      - private-net
 
   lb:
     image: haproxy:3.3.1-alpine
@@ -41,8 +41,8 @@ services:
     cpus: "0.20"
 
     networks:
-      - web-net
+      - private-net
 
 networks:
-  web-net:
+  private-net:
     driver: bridge
