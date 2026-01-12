@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   gradle:
-    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@66fe29258cfcf7c00a1a75b9e75f1a42b888892d
+    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@e18a680e2d4fa4780817db31b4fc91867ed72581
     with:
       cache_gradle: true
       cache_sonar: true
