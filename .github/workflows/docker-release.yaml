@@ -25,7 +25,7 @@ jobs:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   push:
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@1.5
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@v1.7
     permissions:
       packages: write
       contents: read
