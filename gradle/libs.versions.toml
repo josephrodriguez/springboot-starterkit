@@ -4,7 +4,7 @@
 [versions]
 org-projectlombok-lombok = "1.18.42"
 org-springdoc-springdoc-openapi-starter-webmvc-ui = "3.0.1"
-org-springframework-boot-spring-boot-starter-actuator = "4.0.1"
+org-springframework-boot-spring-boot-starter-actuator = "4.0.2"
 org-springframework-boot-spring-boot-starter-test = "4.0.1"
 org-springframework-boot-spring-boot-starter-web = "4.0.2"
 org-springframework-boot-spring-boot-starter-web-services = "4.0.1"
