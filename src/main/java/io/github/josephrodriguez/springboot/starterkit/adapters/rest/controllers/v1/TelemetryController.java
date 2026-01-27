@@ -1,6 +1,7 @@
 package io.github.josephrodriguez.springboot.starterkit.adapters.rest.controllers.v1;
 
 import io.github.josephrodriguez.springboot.starterkit.adapters.rest.contracts.responses.IoTDeviceTelemetryResponse;
+import io.github.josephrodriguez.springboot.starterkit.application.services.TelemetryService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/telemetry")
 public class TelemetryController {
+
+    private final TelemetryService telemetryService;
+
+    public TelemetryController(TelemetryService telemetryService) {
+        this.telemetryService = telemetryService;
+    }
 
     @GetMapping("/{deviceId}")
     public ResponseEntity<IoTDeviceTelemetryResponse> getTelemetry(@PathVariable UUID deviceId) {
