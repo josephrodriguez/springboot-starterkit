@@ -15,7 +15,7 @@ public class FilterConfig {
 
         registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns("/status/*");
-        registrationBean.setOrder(2); //set precedence
+        registrationBean.setOrder(2);
         return registrationBean;
     }
 }

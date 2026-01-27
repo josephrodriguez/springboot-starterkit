@@ -1,6 +1,6 @@
-package io.github.josephrodriguez.springboot.starterkit.controller;
+package io.github.josephrodriguez.springboot.starterkit.adapters.rest.controllers.v1;
 
-import io.github.josephrodriguez.springboot.starterkit.responses.StatusResponse;
+import io.github.josephrodriguez.springboot.starterkit.adapters.rest.contracts.responses.StatusResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
