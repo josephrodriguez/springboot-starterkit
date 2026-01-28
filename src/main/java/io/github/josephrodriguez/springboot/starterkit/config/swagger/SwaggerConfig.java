@@ -1,4 +1,4 @@
-package io.github.josephrodriguez.springboot.starterkit.config;
+package io.github.josephrodriguez.springboot.starterkit.config.swagger;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;

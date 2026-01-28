@@ -1,4 +1,4 @@
-package io.github.josephrodriguez.springboot.starterkit.config;
+package io.github.josephrodriguez.springboot.starterkit.config.filtering;
 
 import io.github.josephrodriguez.springboot.starterkit.filters.ScopedResponseFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
