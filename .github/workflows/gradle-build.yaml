@@ -1,15 +1,10 @@
 name: gradle-build
 on:
-  push:
-    branches:
-      - 'feature/*'
-      - 'release/*'
-      - 'fix/*'
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
   gradle:
-    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@e18a680e2d4fa4780817db31b4fc91867ed72581
+    uses: josephrodriguez/github-workflow/.github/workflows/java-gradle-build.yaml@e48e4f0f0d2181d06f3a6562e3f3272e6982c54d
     with:
       cache_gradle: true
       cache_sonar: true
@@ -26,6 +21,6 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@e18a680e2d4fa4780817db31b4fc91867ed72581
+    uses: josephrodriguez/github-workflow/.github/workflows/dependabot-merge-pull-request.yaml@e48e4f0f0d2181d06f3a6562e3f3272e6982c54d
     secrets:
       AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}      

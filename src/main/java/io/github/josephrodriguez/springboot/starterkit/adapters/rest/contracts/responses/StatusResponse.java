@@ -1,4 +1,4 @@
-package io.github.josephrodriguez.springboot.starterkit.responses;
+package io.github.josephrodriguez.springboot.starterkit.adapters.rest.contracts.responses;
 
 import java.time.LocalDateTime;
 

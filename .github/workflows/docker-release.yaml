@@ -13,7 +13,7 @@ jobs:
             platform: linux/arm64
           - runner: ubuntu-latest
             platform: linux/amd64
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@v1.7
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release-by-digest.yaml@e48e4f0f0d2181d06f3a6562e3f3272e6982c54d
     with:
       github_runner: ${{ matrix.build.runner }}
       docker_image_name: ghcr.io/${{ github.repository }}
@@ -25,7 +25,7 @@ jobs:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   push:
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@v1.7
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-push-release-by-digest.yaml@e48e4f0f0d2181d06f3a6562e3f3272e6982c54d
     permissions:
       packages: write
       contents: read

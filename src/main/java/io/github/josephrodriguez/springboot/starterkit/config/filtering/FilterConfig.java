@@ -1,4 +1,4 @@
-package io.github.josephrodriguez.springboot.starterkit.config;
+package io.github.josephrodriguez.springboot.starterkit.config.filtering;
 
 import io.github.josephrodriguez.springboot.starterkit.filters.ScopedResponseFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -15,7 +15,7 @@ public class FilterConfig {
 
         registrationBean.setFilter(filter);
         registrationBean.addUrlPatterns("/status/*");
-        registrationBean.setOrder(2); //set precedence
+        registrationBean.setOrder(2);
         return registrationBean;
     }
 }
