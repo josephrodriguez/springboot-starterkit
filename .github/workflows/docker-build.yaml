@@ -24,6 +24,7 @@ jobs:
       trivy_enabled: true
       trivy_image_reference: ${{ github.repository }}
       trivy_format: 'sarif'
+      trivy_output: 'trivy-results.sarif'
       trivy_upload_sarif: true
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
