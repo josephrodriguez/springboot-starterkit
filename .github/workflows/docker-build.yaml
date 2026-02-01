@@ -7,6 +7,7 @@ jobs:
     permissions:
       contents: read
       security-events: write
+      actions: read
     strategy:
       fail-fast: true
       matrix:
@@ -15,7 +16,7 @@ jobs:
             runner: ubuntu-latest
           - platform: linux/arm64
             runner: ubuntu-24.04-arm
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@e7fcd1c0b2c71a30098fbc5737c2371baa83cbae
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@89a34f091f8490cbcd09a32a3c6198e34aa3122a
     with:
       github_runner: ${{ matrix.build.runner }}
       docker_image_name: ${{ github.repository }}
