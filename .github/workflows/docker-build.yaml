@@ -4,6 +4,10 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   docker:
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
     strategy:
       fail-fast: true
       matrix:
@@ -12,7 +16,7 @@ jobs:
             runner: ubuntu-latest
           - platform: linux/arm64
             runner: ubuntu-24.04-arm
-    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@e18a680e2d4fa4780817db31b4fc91867ed72581
+    uses: josephrodriguez/github-workflow/.github/workflows/docker-build-release.yaml@89a34f091f8490cbcd09a32a3c6198e34aa3122a
     with:
       github_runner: ${{ matrix.build.runner }}
       docker_image_name: ${{ github.repository }}
@@ -20,6 +24,9 @@ jobs:
       docker_registry_url: ghcr.io
       trivy_enabled: true
       trivy_image_reference: ${{ github.repository }}
+      trivy_format: 'sarif'
+      trivy_output: 'trivy-results.sarif'
+      trivy_upload_sarif: true
     secrets:
       DOCKER_REGISTRY_USERNAME: ${{ github.actor }}
       DOCKER_REGISTRY_TOKEN: ${{ secrets.GITHUB_TOKEN }}

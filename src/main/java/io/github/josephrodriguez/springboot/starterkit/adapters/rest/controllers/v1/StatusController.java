@@ -1,6 +1,7 @@
-package io.github.josephrodriguez.springboot.starterkit.controller;
+package io.github.josephrodriguez.springboot.starterkit.adapters.rest.controllers.v1;
 
-import io.github.josephrodriguez.springboot.starterkit.responses.StatusResponse;
+import io.github.josephrodriguez.springboot.starterkit.adapters.rest.contracts.responses.StatusResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +12,13 @@ import java.time.ZoneOffset;
 
 @Slf4j
 @RestController
+@Tag(name = "Status", description = "Service status endpoint")
 public class StatusController {
 
     @GetMapping("/status")
     public ResponseEntity<StatusResponse> getStatus() {
 
-        StatusResponse response = new StatusResponse("running", LocalDateTime.now(ZoneOffset.UTC));
+        var response = new StatusResponse("running", LocalDateTime.now(ZoneOffset.UTC));
         return ResponseEntity
                 .ok()
                 .body(response);
