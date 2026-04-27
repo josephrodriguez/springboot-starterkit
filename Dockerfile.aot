@@ -15,7 +15,7 @@ COPY src src
 RUN ./gradlew nativeCompile --no-daemon --info
 
 # Runtime image for the native binary
-FROM debian:bookworm-slim@sha256:4724b8cc51e33e398f0e2e15e18d5ec2851ff0c2280647e1310bc1642182655d AS runtime
+FROM debian:bookworm-slim@sha256:f9c6a2fd2ddbc23e336b6257a5245e31f996953ef06cd13a59fa0a1df2d5c252 AS runtime
 WORKDIR /app
 COPY --from=build /app/build/native/nativeCompile/springboot-starterkit /app/app
 RUN chmod +x /app/app
