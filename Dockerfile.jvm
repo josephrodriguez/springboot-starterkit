@@ -1,4 +1,4 @@
-FROM eclipse-temurin:25-jdk-alpine@sha256:d3f9f60ad2040582239e2977ee753d598787d8b064ca39a8e131860165dd81fb AS build
+FROM eclipse-temurin:25-jdk-alpine@sha256:30d9f87d702c2c1c601ed0d31e0c88ea1ea474ee7676cda7b7a59e759181c4dd AS build
 
 # Set working directory
 WORKDIR /usr/app
@@ -14,7 +14,7 @@ COPY src src
 RUN chmod +x ./gradlew && ./gradlew build --no-daemon
 
 ## Use a smaller JRE image for the runtime
-FROM eclipse-temurin:25-jre-alpine@sha256:5fcc27581b238efbfda93da3a103f59e0b5691fe522a7ac03fe8057b0819c888 AS runtime
+FROM eclipse-temurin:25-jre-alpine@sha256:c707c0d18cb9e8556380719f80d96a7529d0746fbb42143893949b98ed2f8943 AS runtime
 
 # Create the application directory
 RUN mkdir /app
