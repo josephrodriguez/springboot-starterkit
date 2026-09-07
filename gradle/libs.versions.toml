@@ -2,7 +2,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-org-projectlombok-lombok = "1.18.46"
+org-projectlombok-lombok = "1.18.48"
 org-springdoc-springdoc-openapi-starter-webmvc-ui = "3.1.0"
 org-springframework-boot-spring-boot-starter-actuator = "4.1.1"
 org-springframework-boot-spring-boot-starter-test = "4.1.1"
