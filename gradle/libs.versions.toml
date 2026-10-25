@@ -4,12 +4,13 @@
 [versions]
 org-projectlombok-lombok = "1.18.48"
 org-springdoc-springdoc-openapi-starter-webmvc-ui = "3.1.1"
-org-springframework-boot-spring-boot-starter-actuator = "4.1.1"
-org-springframework-boot-spring-boot-starter-test = "4.1.1"
-org-springframework-boot-spring-boot-starter-web = "4.1.1"
-org-springframework-boot-spring-boot-starter-web-services = "4.1.1"
-org-springframework-boot-spring-boot-starter-thymeleaf = "4.1.1"
+org-springframework-boot-spring-boot-starter-actuator = "4.1.2"
+org-springframework-boot-spring-boot-starter-test = "4.1.2"
+org-springframework-boot-spring-boot-starter-web = "4.1.2"
+org-springframework-boot-spring-boot-starter-web-services = "4.1.2"
+org-springframework-boot-spring-boot-starter-thymeleaf = "4.1.2"
 org-yaml-snakeyaml = "2.7"
+com-fasterxml-jackson-core-jackson-databind = "2.22.4"
 
 [libraries]
 org-projectlombok-lombok = { module = "org.projectlombok:lombok", version.ref = "org-projectlombok-lombok" }
@@ -20,3 +21,4 @@ org-springframework-boot-spring-boot-starter-web = { module = "org.springframewo
 org-springframework-boot-spring-boot-starter-web-services = { module = "org.springframework.boot:spring-boot-starter-web-services", version.ref = "org-springframework-boot-spring-boot-starter-web-services" }
 org-springframework-boot-spring-boot-starter-thymeleaf = { module = "org.springframework.boot:spring-boot-starter-thymeleaf", version.ref = "org-springframework-boot-spring-boot-starter-thymeleaf"}
 org-yaml-snakeyaml = { module = "org.yaml:snakeyaml", version.ref = "org-yaml-snakeyaml" }
+com-fasterxml-jackson-core-jackson-databind = { module="com.fasterxml.jackson.core:jackson-databind", version.ref = "com-fasterxml-jackson-core-jackson-databind"}
